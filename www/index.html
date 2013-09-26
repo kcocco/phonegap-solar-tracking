@@ -45,8 +45,7 @@
             // device APIs are available call geo
             //
             function onDeviceReady() {
-                //navigator.compass.getCurrentHeading(onSuccessCompass, onErrorCompass);
-                onSuccessCompass;
+                navigator.compass.getCurrentHeading(onSuccessCompass, onErrorCompass);
                 startWatch();
             }
 
