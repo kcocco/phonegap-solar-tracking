@@ -46,7 +46,6 @@
             //
             function onDeviceReady() {
                 navigator.compass.getCurrentHeading(onSuccessCompass, onErrorCompass);
-                navigator.geolocation.getCurrentPosition(onSuccessGeo, onErrorGeo);
             }
 
             // onSuccess: Get the current heading
@@ -54,6 +53,7 @@
             function onSuccessCompass(heading) {
                 //alert('Heading: ' + heading.magneticHeading);
                 window.heading = heading.magneticHeading;
+                navigator.geolocation.getCurrentPosition(onSuccessGeo, onErrorGeo);
             }
 
             // onError: Failed to get the heading
