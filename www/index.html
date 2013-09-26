@@ -33,6 +33,14 @@
             //
             document.addEventListener("deviceready", onDeviceReady, false);
 
+            function convertDeg(degIn) {
+                if (degIn>-1) 
+                {degOut = 180 + degIn}
+                else 
+                {degOut = 180 - Math.abs(degIn)}
+                return degOut;
+            }
+
             // device APIs are available
             //
             function onDeviceReady() {
@@ -74,7 +82,7 @@
                 var currentPos = SunCalc.getPosition(currentDate, lat, lng);
 
                 // azimuth in degrees
-                var currentAzimuth = currentPos.azimuth * 180 / Math.PI;
+                var currentAzimuth = convertDeg(currentPos.azimuth * 180 / Math.PI);
 
                 // altitude in degrees
                 var currentAltitude = currentPos.altitude * 180 / Math.PI;
@@ -89,7 +97,7 @@
                 var sunrisePos = SunCalc.getPosition(times.sunrise, lat, lng);
 
                 // azimuth in degrees
-                var sunriseAzimuth = sunrisePos.azimuth * 180 / Math.PI;
+                var sunriseAzimuth = convertDeg(sunrisePos.azimuth * 180 / Math.PI);
 
                 // altitude in degrees
                 var sunriseAltitude = sunrisePos.altitude * 180 / Math.PI;
