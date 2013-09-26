@@ -47,27 +47,6 @@
                 init_altitudeForecast("altitudeForecast");
                 altitudeForecast(1,"5:59","20:50","15:15",60,altitudeArray,-21600,cloudCoverArray,precipProbabilityArray,windSpeedArray);
                 
-                 // ***************************************************************
-                // Solar Azimuth and Altitude
-                var date = new Date('2013-03-05UTC'),
-                lat = 50.5,
-                lng = 30.5;
-                // get today's sunlight times for London
-                var times = SunCalc.getTimes(new Date(), 51.5, -0.1);
-
-                // format sunrise time from the Date object
-                var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
-
-                // get position of the sun (azimuth and altitude) at today's sunrise
-                var sunrisePos = SunCalc.getPosition(times.sunrise, 51.5, -0.1);
-
-                // get sunrise azimuth in degrees
-                var sunriseAzimuth = sunrisePos.azimuth * 180 / Math.PI;
-                
-                var element = document.getElementById('suncalc');
-                element.innerHTML = 'sunriseStr: '          + sunriseStr             + '<br />' +
-                                    'sunrisePos: '          + sunrisePos             + '<br />' +
-                                    'sunriseAzimuth: '      + sunriseAzimuth         + '<br />';
             }
 
             // onSuccess Geolocation
@@ -77,13 +56,35 @@
                 // Geocode Lat & Long
                 var element = document.getElementById('geolocation');
                 element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                                    'Longitude: '          + position.coords.longitude             + '<br />' +
+                                    'Longitude: '          + position.coords.latitude             + '<br />' +
                                     'Altitude: '           + position.coords.altitude              + '<br />' +
                                     'Accuracy: '           + position.coords.accuracy              + '<br />' +
                                     'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
                                     'Heading: '            + position.coords.heading               + '<br />' +
                                     'Speed: '              + position.coords.speed                 + '<br />' +
                                     'Timestamp:'           + position.timestamp                    + '<br />';
+
+                // ***************************************************************
+                // Solar Azimuth and Altitude
+                var date = new Date('2013-03-05UTC'),
+                lat = position.coords.latitude,
+                lng = position.coords.latitude;
+                // get today's sunlight times for London
+                var times = SunCalc.getTimes(new Date(), lat, lng);
+
+                // format sunrise time from the Date object
+                var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
+
+                // get position of the sun (azimuth and altitude) at today's sunrise
+                var sunrisePos = SunCalc.getPosition(times.sunrise, lat, lng);
+
+                // get sunrise azimuth in degrees
+                var sunriseAzimuth = sunrisePos.azimuth * 180 / Math.PI;
+                
+                var element = document.getElementById('suncalc');
+                element.innerHTML = 'sunriseStr: '          + sunriseStr             + '<br />' +
+                                    'sunrisePos: '          + sunrisePos             + '<br />' +
+                                    'sunriseAzimuth: '      + sunriseAzimuth         + '<br />';
             }
 
             // onError Callback receives a PositionError object
