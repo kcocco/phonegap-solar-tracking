@@ -143,10 +143,11 @@
                 //raphaelDraw Alignment compass
                 // alignmentGauge(refresh, azimuth, heading, sunRiseAngle, sunSetAngle, sunRiseTime, sunSetTime)
                 init_alignmentGauge("alignmentGauge");
-                //alignmentGauge(1,200,250,64,292,"5:67","9:11");
+                alignmentGauge(1,200,250,64,292,"5:67","9:11");
                 //alignmentGauge(0,30,190.923123,64,292,"5:32","9:15");
                 //alignmentGauge(0,95,13.123,64,292,"5:32","9:15");
-                alignmentGauge(1,currentAzimuth,window.heading,sunriseAzimuth,sunsetAzimuth,sunriseStr,sunsetStr);
+                //alignmentGauge(1,currentAzimuth,window.heading,sunriseAzimuth,sunsetAzimuth,sunriseStr,sunsetStr);
+                
             }
 
             // onError Callback receives a PositionError object
@@ -171,7 +172,7 @@
             function startWatch() {
 
                 // Update compass every 3 seconds
-                var options = { frequency: 3000 };
+                var options = { frequency: 1000 };
 
                 watchID = navigator.compass.watchHeading(onSuccess, onError, options);
             }
@@ -190,6 +191,8 @@
             function onSuccess(heading) {
                 var element = document.getElementById('heading');
                 element.innerHTML = 'Heading: ' + heading.magneticHeading;
+                // alignmentGauge(refresh, azimuth, heading, sunRiseAngle, sunSetAngle, sunRiseTime, sunSetTime)
+                alignmentGauge(0,200,heading.magneticHeading,64,292,"5:67","9:11");
             }
 
             // onError: Failed to get the heading
@@ -217,7 +220,7 @@
         <div id="heading">Waiting for heading...</div>
         <button onclick="startWatch();">Start Watching</button>
         <button onclick="stopWatch();">Stop Watching</button>
-<!-- -->
+<!-- 
         <div class="app">
             <h1>PhoneGap</h1>
             <div id="deviceready" class="blink">
@@ -225,7 +228,7 @@
                 <p class="event received">Device is Ready</p>
             </div>
         </div>
-
+-->
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript">
