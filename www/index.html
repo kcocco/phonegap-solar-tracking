@@ -42,13 +42,24 @@
                 return degOut;
             }
 
-            // device APIs are available
+            // device APIs are available call geo
             //
             function onDeviceReady() {
-                navigator.geolocation.getCurrentPosition(onSuccessGeo, onError);
+                navigator.compass.getCurrentHeading(onSuccessCompass, onErrorCompass);
+                navigator.geolocation.getCurrentPosition(onSuccessGeo, onErrorGeo);
+            }
 
-                
- 
+            // onSuccess: Get the current heading
+            //
+            function onSuccessCompass(heading) {
+                //alert('Heading: ' + heading.magneticHeading);
+                window.heading = heading.magneticHeading;
+            }
+
+            // onError: Failed to get the heading
+            //
+            function onErrorCompass(compassError) {
+                alert('Compass Error: ' + compassError.code);
             }
 
             // onSuccess Geolocation
@@ -132,12 +143,12 @@
                 //alignmentGauge(1,200,250,64,292,"5:67","9:11");
                 //alignmentGauge(0,30,190.923123,64,292,"5:32","9:15");
                 //alignmentGauge(0,95,13.123,64,292,"5:32","9:15");
-                alignmentGauge(1,currentAzimuth,20,sunriseAzimuth,sunsetAzimuth,sunriseStr,sunsetStr);
+                alignmentGauge(1,currentAzimuth,window.heading,sunriseAzimuth,sunsetAzimuth,sunriseStr,sunsetStr);
             }
 
             // onError Callback receives a PositionError object
             //
-            function onError(error) {
+            function onErrorGeo(error) {
                 alert('code: '    + error.code    + '\n' +
                       'message: ' + error.message + '\n');
             }
