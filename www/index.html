@@ -45,7 +45,9 @@
             // device APIs are available call geo
             //
             function onDeviceReady() {
-                navigator.compass.getCurrentHeading(onSuccessCompass, onErrorCompass);
+                //navigator.compass.getCurrentHeading(onSuccessCompass, onErrorCompass);
+                onSuccessCompass;
+                startWatch();
             }
 
             // onSuccess: Get the current heading
@@ -156,39 +158,49 @@
             }
 
 
-            var compassWatch = null;
+            // The watch id references the current `watchHeading`
+            var watchID = null;
 
-            function updateHeading(h) {
-                document.getElementById('heading').innerHTML = h.magneticHeading;
+            // Cordova is ready
+            //
+            //function onDeviceReady() {
+            //    startWatch();
             }
-            function compassError(error) {
-                alert('Compass Error: ' + error.code);
-                document.getElementById('heading').innerHTML = "Error";
+
+            // Start watching the compass
+            //
+            function startWatch() {
+
+                // Update compass every 3 seconds
+                var options = { frequency: 3000 };
+
+                watchID = navigator.compass.watchHeading(onSuccess, onError, options);
             }
-            function toggleCompass() {
-                if (compassWatch !== null) {
-                    navigator.compass.clearWatch(compassWatch);
-                    compassWatch = null;
-                    updateHeading({ magneticHeading : ""});
-                } else { 
-                    // Compass Options: Android: filter is not supported
-                    var options = { frequency: 1000 };
-                    compassWatch = navigator.compass.watchHeading(
-                            updateHeading, compassError, options);
+
+            // Stop watching the compass
+            //
+            function stopWatch() {
+                if (watchID) {
+                    navigator.compass.clearWatch(watchID);
+                    watchID = null;
                 }
             }
-            function getCurrentHeading() {
-                if (compassWatch !== null) {
-                    navigator.compass.clearWatch(compassWatch);
-                    compassWatch = null;
-                    updateHeading({ magneticHeading : ""});
-                }
-                navigator.compass.getCurrentHeading(updateHeading, compassError);
+
+            // onSuccess: Get the current heading
+            //
+            function onSuccess(heading) {
+                var element = document.getElementById('heading');
+                element.innerHTML = 'Heading: ' + heading.magneticHeading;
             }
 
+            // onError: Failed to get the heading
+            //
+            function onError(compassError) {
+                alert('Compass error: ' + compassError.code);
+            }
+    
 
-
-        </script>
+       </script>
     </head>
     <body>
       
@@ -203,7 +215,9 @@
         <p id="suncalc">suncalc...</p>
         <br>
         <h1> HEADING: </h1>
-        <p id="heading">suncalc...</p>
+        <div id="heading">Waiting for heading...</div>
+        <button onclick="startWatch();">Start Watching</button>
+        <button onclick="stopWatch();">Stop Watching</button>
 
         <div class="app">
             <h1>PhoneGap</h1>
