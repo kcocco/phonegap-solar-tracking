@@ -37,7 +37,24 @@
             //
             function onDeviceReady() {
                 navigator.geolocation.getCurrentPosition(onSuccessGeo, onError);
+            }
 
+            // onSuccess Geolocation
+            //
+            function onSuccessGeo(position) {
+                // ***************************************************************
+                // Geocode Lat & Long
+                var element = document.getElementById('geolocation');
+                element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
+                                    'Longitude: '          + position.coords.longitude             + '<br />' +
+                                    'Altitude: '           + position.coords.altitude              + '<br />' +
+                                    'Accuracy: '           + position.coords.accuracy              + '<br />' +
+                                    'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
+                                    'Heading: '            + position.coords.heading               + '<br />' +
+                                    'Speed: '              + position.coords.speed                 + '<br />' +
+                                    'Timestamp:'           + position.timestamp                    + '<br />';
+            
+                
                 // ***************************************************************
                 //raphaelDraw
                 var windSpeedArray =["33.35", "24.6", "5.89", "5.05", "24.72", "3.44", "4.73", "8.24", "8.73", "8.08", "18.86","9.18", "18.49","8.75","6.56","40.32"]
@@ -69,22 +86,6 @@
                                     'current Altitude: ' + currentPos.altitude * 180 / Math.PI           + '<br />' +
                                     'current Azimuth: '  + currentPos.azimuth * 180 / Math.PI           + '<br />' +
                                     'sunriseAzimuth: '      + sunriseAzimuth                + '<br />';
-            }
-
-            // onSuccess Geolocation
-            //
-            function onSuccessGeo(position) {
-                // ***************************************************************
-                // Geocode Lat & Long
-                var element = document.getElementById('geolocation');
-                element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                                    'Longitude: '          + position.coords.longitude             + '<br />' +
-                                    'Altitude: '           + position.coords.altitude              + '<br />' +
-                                    'Accuracy: '           + position.coords.accuracy              + '<br />' +
-                                    'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-                                    'Heading: '            + position.coords.heading               + '<br />' +
-                                    'Speed: '              + position.coords.speed                 + '<br />' +
-                                    'Timestamp:'           + position.timestamp                    + '<br />';
             }
 
             // onError Callback receives a PositionError object
