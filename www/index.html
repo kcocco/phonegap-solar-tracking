@@ -52,6 +52,7 @@
             //
             function onSuccessCompass(heading) {
                 //alert('Heading: ' + heading.magneticHeading);
+                console.log('Heading: ' + heading.magneticHeading);
                 window.heading = heading.magneticHeading;
                 navigator.geolocation.getCurrentPosition(onSuccessGeo, onErrorGeo);
             }
@@ -60,6 +61,7 @@
             //
             function onErrorCompass(compassError) {
                 alert('Compass Error: ' + compassError.code);
+                console.log('Compass Error: ' + compassError.code);
             }
 
             // onSuccess Geolocation
