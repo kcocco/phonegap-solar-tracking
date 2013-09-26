@@ -26,6 +26,7 @@
         <title>Hello World</title>
         <script src="./js/raphael-min.js" type="text/javascript"></script>
         <script src="./js/altitudeForecast.js" type="text/javascript"></script>
+        <script src="alignmentGauge.js" type="text/javascript"></script>
         <script src="./js/suncalc.js" type="text/javascript"></script>
         <script type="text/javascript" charset="utf-8">
 
@@ -47,14 +48,22 @@
                 navigator.geolocation.getCurrentPosition(onSuccessGeo, onError);
 
                 // ***************************************************************
-                //raphaelDraw
+                //raphaelDraw Altitude and weather
                 var windSpeedArray =["33.35", "24.6", "5.89", "5.05", "24.72", "3.44", "4.73", "8.24", "8.73", "8.08", "18.86","9.18", "18.49","8.75","6.56","40.32"]
                 var precipProbabilityArray = ["0.01","0.03","0.005","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"]
                 var cloudCoverArray = ["0.46","0.5","0.41","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"]
                 var altitudeArray = ["-3", "5", "15", "26", "37", "49", "59", "68", "72", "67", "58", "47", "36", "25", "14", "3"];
                 init_altitudeForecast("altitudeForecast");
                 altitudeForecast(1,"5:59","20:50","15:15",60,altitudeArray,-21600,cloudCoverArray,precipProbabilityArray,windSpeedArray);
-                
+
+                // ***************************************************************
+                //raphaelDraw Alignment compass
+                // alignmentGauge(refresh, azimuth, heading, sunRiseAngle, sunSetAngle, sunRiseTime, sunSetTime)
+                init_alignmentGauge("alignmentGauge");
+                alignmentGauge(1,200,250,64,292,"5:67","9:11");
+                alignmentGauge(0,30,190.923123,64,292,"5:32","9:15");
+                alignmentGauge(0,95,13.123,64,292,"5:32","9:15");
+ 
             }
 
             // onSuccess Geolocation
@@ -64,7 +73,7 @@
                 // Geocode Lat & Long
                 var element = document.getElementById('geolocation');
                 element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-                                    'Longitude: '          + position.coords.longitude            + '<br />' +
+                                    'Longitude: '          + position.coords.longitude             + '<br />' +
                                     'Altitude: '           + position.coords.altitude              + '<br />' +
                                     'Accuracy: '           + position.coords.accuracy              + '<br />' +
                                     'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
@@ -104,6 +113,12 @@
 
                 // format sunset time from the Date object
                 var sunsetStr = times.sunset.getHours() + ':' + times.sunset.getMinutes();
+
+                // get position of the sun (azimuth and altitude) at today's sunrise
+                var sunsetPos = SunCalc.getPosition(times.sunset, lat, lng);
+
+                // azimuth in degrees
+                var sunsetAzimuth = convertDeg(sunsetPos.azimuth * 180 / Math.PI);
                 
                 var element = document.getElementById('suncalc');
                 element.innerHTML = 'CURRENT - date time: '    + currentDate            + '<br />' +
@@ -112,7 +127,8 @@
                                     'SUNRISE time: '           + sunriseStr             + '<br />' +
                                     '        - Azimuth: '      + sunriseAzimuth         + '<br />' +
                                     '        - Altitude: '     + sunriseAltitude        + '<br />' +
-                                    'SUNSET time: '            + sunsetStr              + '<br />' ;
+                                    'SUNSET time: '            + sunsetStr              + '<br />' +
+                                    '        - Azimuth: '      + sunsetAzimuth          + '<br />';
             }
 
             // onError Callback receives a PositionError object
@@ -125,9 +141,10 @@
     </head>
     <body>
       
-      <div id="altitudeForecast"></div>
-
-
+        <div id="alignmentGauge"></div>
+        <br>
+        <div id="altitudeForecast"></div>
+        <br>
         <p id="geolocation">Finding geolocation...</p>
         <br>
         <p id="suncalc">suncalc...</p>
