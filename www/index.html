@@ -66,17 +66,17 @@
 
                 // ***************************************************************
                 // Solar Azimuth and Altitude
-                var date = new Date('2013-03-05UTC'),
+                var currentDate = new Date(),
                 lat = position.coords.latitude,
                 lng = position.coords.latitude;
                 // get today's sunlight times for London
-                var times = SunCalc.getTimes(new Date(), lat, lng);
+                var times = SunCalc.getTimes(currentDate, lat, lng);
 
                 // format sunrise time from the Date object
                 var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
 
                 // get position of the sun (azimuth and altitude) at today's sunrise
-                var sunrisePos = SunCalc.getPosition(times.sunrise, lat, lng);
+                var sunrisePos = SunCalc.getPosition(currentDate, lat, lng);
 
                 // get sunrise azimuth in degrees
                 var sunriseAzimuth = sunrisePos.azimuth * 180 / Math.PI;
