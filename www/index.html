@@ -26,6 +26,7 @@
         <title>Hello World</title>
         <script src="./js/raphael-min.js" type="text/javascript"></script>
         <script src="./js/altitudeForecast.js" type="text/javascript"></script>
+        <script src="./js/suncalc.js" type="text/javascript"></script>
         <script type="text/javascript" charset="utf-8">
 
             // Wait for device API libraries to load
@@ -35,12 +36,45 @@
             // device APIs are available
             //
             function onDeviceReady() {
-                navigator.geolocation.getCurrentPosition(onSuccess, onError);
+                navigator.geolocation.getCurrentPosition(onSuccessGeo, onError);
+
+                // ***************************************************************
+                //raphaelDraw
+                var windSpeedArray =["33.35", "24.6", "5.89", "5.05", "24.72", "3.44", "4.73", "8.24", "8.73", "8.08", "18.86","9.18", "18.49","8.75","6.56","40.32"]
+                var precipProbabilityArray = ["0.01","0.03","0.005","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"]
+                var cloudCoverArray = ["0.46","0.5","0.41","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"]
+                var altitudeArray = ["-3", "5", "15", "26", "37", "49", "59", "68", "72", "67", "58", "47", "36", "25", "14", "3"];
+                init_altitudeForecast("altitudeForecast");
+                altitudeForecast(1,"5:59","20:50","15:15",60,altitudeArray,-21600,cloudCoverArray,precipProbabilityArray,windSpeedArray);
+                
+                 // ***************************************************************
+                // Solar Azimuth and Altitude
+                var date = new Date('2013-03-05UTC'),
+                lat = 50.5,
+                lng = 30.5;
+                // get today's sunlight times for London
+                var times = SunCalc.getTimes(new Date(), 51.5, -0.1);
+
+                // format sunrise time from the Date object
+                var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
+
+                // get position of the sun (azimuth and altitude) at today's sunrise
+                var sunrisePos = SunCalc.getPosition(times.sunrise, 51.5, -0.1);
+
+                // get sunrise azimuth in degrees
+                var sunriseAzimuth = sunrisePos.azimuth * 180 / Math.PI;
+                
+                var element = document.getElementById('suncalc');
+                element.innerHTML = 'sunriseStr: '          + sunriseStr             + '<br />' +
+                                    'sunrisePos: '          + sunrisePos             + '<br />' +
+                                    'sunriseAzimuth: '      + sunriseAzimuth         + '<br />';
             }
 
             // onSuccess Geolocation
             //
-            function onSuccess(position) {
+            function onSuccessGeo(position) {
+                // ***************************************************************
+                // Geocode Lat & Long
                 var element = document.getElementById('geolocation');
                 element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
                                     'Longitude: '          + position.coords.longitude             + '<br />' +
@@ -49,14 +83,7 @@
                                     'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
                                     'Heading: '            + position.coords.heading               + '<br />' +
                                     'Speed: '              + position.coords.speed                 + '<br />' +
-                                    'Timestamp: testing '          + position.timestamp                    + '<br />';
-                //raphaelDraw
-                var windSpeedArray =["33.35", "24.6", "5.89", "5.05", "24.72", "3.44", "4.73", "8.24", "8.73", "8.08", "18.86","9.18", "18.49","8.75","6.56","40.32"]
-                var precipProbabilityArray = ["0.01","0.03","0.005","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"]
-                var cloudCoverArray = ["0.46","0.5","0.41","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"]
-                var altitudeArray = ["-3", "5", "15", "26", "37", "49", "59", "68", "72", "67", "58", "47", "36", "25", "14", "3"];
-                init_altitudeForecast("altitudeForecast");
-                altitudeForecast(1,"5:59","20:50","15:15",60,altitudeArray,-21600,cloudCoverArray,precipProbabilityArray,windSpeedArray);
+                                    'Timestamp:'           + position.timestamp                    + '<br />';
             }
 
             // onError Callback receives a PositionError object
@@ -73,6 +100,10 @@
 
 
         <p id="geolocation">Finding geolocation...</p>
+        <br>
+        <p id="suncalc">suncalc...</p>
+        <br>
+
         <div class="app">
             <h1>PhoneGap</h1>
             <div id="deviceready" class="blink">
