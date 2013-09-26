@@ -80,10 +80,10 @@
                                     'Speed: '              + position.coords.speed                 + '<br />' +
                                     'Timestamp:'           + position.timestamp                    + '<br />';
 
-                var window.currentDate = new Date(),
-                window.lat = position.coords.latitude,
-                window.lng = position.coords.longitude;
-                window.heading = 0;
+                var window.currentDate = new Date();
+                var window.lat = position.coords.latitude;
+                var window.lng = position.coords.longitude;
+                var window.heading = 0;
                 drawGraphics(1);
                 startWatch();                               
             }
@@ -109,7 +109,7 @@
                 var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
 
                 // get position of the sun (azimuth and altitude) at today's sunrise
-                var sunrisePos = SunCalc.getPosition(times.sunrise, window.lat, lng);
+                var sunrisePos = SunCalc.getPosition(times.sunrise, window.lat, window.lng);
 
                 // azimuth in degrees
                 var sunriseAzimuth = convertDeg(sunrisePos.azimuth * 180 / Math.PI);
