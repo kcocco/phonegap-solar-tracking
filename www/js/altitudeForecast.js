@@ -79,7 +79,8 @@ Raphael.fn.roundedRectangle = function (x, y, w, h, r1, r2, r3, r4){
 function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, altitudeArray, UTCoffset, cloudCoverArray, precipProbabilityArray, windSpeedArray){
 
       console.log('altitudeForecast vars'+' * '+ refresh+' * '+ sunrise+' * '+ sunset+' * '+ currentTime +' * '+currentAlt +' * '+altitudeArray +' * ATLVAR:'+altitudeArray[0]);
-      var currentTime = calcTime(UTCoffset);
+      // offset not used
+	  //var currentTime = calcTime(UTCoffset);
       var currentTimeSplit = currentTime.split(":");
       var sunRiseSplit = sunrise.split(":");
       var sunSetSplit = sunset.split(":");
