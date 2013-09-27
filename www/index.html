@@ -165,9 +165,9 @@ SproutLoop.com
                         element.innerHTML = 'forecast: '    +data.hourly.data[14].summary;
                         i = sunriseHour;
                         while (i<=sunsetHour) {
-                            cloudCoverArray.push(string(data.hourly.data[i].cloudCover));
-                            precipProbabilityArray.push(string(data.hourly.data[i].precipProbability));
-                            windSpeedArray.push(string(data.hourly.data[i].windSpeed));
+                            cloudCoverArray.push(data.hourly.data[i].cloudCover);
+                            precipProbabilityArray.push(data.hourly.data[i].precipProbability);
+                            windSpeedArray.push(data.hourly.data[i].windSpeed);
                             i++;
                         }
                         //alert(cloudCoverArray.join('\n'))
