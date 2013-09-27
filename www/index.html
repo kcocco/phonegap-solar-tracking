@@ -52,6 +52,15 @@ SproutLoop.com
                 console.log('Compass Error: ' + compassError.code);
             }
 
+            
+            var currentDate;
+            var currentAzimuth;        
+            var currentAltitude; 
+            var sunriseStr;
+            var sunriseAzimuth;
+            var sunsetStr;
+            var sunsetAzimuth; 
+
             // onSuccess Geolocation
             //
             function onSuccessGeo(position) {
@@ -69,42 +78,42 @@ SproutLoop.com
 
                 // ***************************************************************
                 // Solar Azimuth and Altitude
-                var currentDate = new Date();
-                var lat = position.coords.latitude;
-                var lng = position.coords.longitude;
+                currentDate = new Date();
+                lat = position.coords.latitude;
+                lng = position.coords.longitude;
 
                 // get position of the sun (azimuth and altitude) at today's sunrise
-                var currentPos = SunCalc.getPosition(currentDate, lat, lng);
+                currentPos = SunCalc.getPosition(currentDate, lat, lng);
 
                 // azimuth in degrees
-                var currentAzimuth = convertDeg(currentPos.azimuth * 180 / Math.PI);
+                currentAzimuth = convertDeg(currentPos.azimuth * 180 / Math.PI);
 
                 // altitude in degrees
-                var currentAltitude = currentPos.altitude * 180 / Math.PI;
+                currentAltitude = currentPos.altitude * 180 / Math.PI;
 
                 // get today's sunlight times for current lat lng
                 var times = SunCalc.getTimes(currentDate, lat, lng);
 
                 // format sunrise time from the Date object
-                var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
+                sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
 
                 // get position of the sun (azimuth and altitude) at today's sunrise
-                var sunrisePos = SunCalc.getPosition(times.sunrise, lat, lng);
+                sunrisePos = SunCalc.getPosition(times.sunrise, lat, lng);
 
                 // azimuth in degrees
-                var sunriseAzimuth = convertDeg(sunrisePos.azimuth * 180 / Math.PI);
+                sunriseAzimuth = convertDeg(sunrisePos.azimuth * 180 / Math.PI);
 
                 // altitude in degrees
-                var sunriseAltitude = sunrisePos.altitude * 180 / Math.PI;
+                //var sunriseAltitude = sunrisePos.altitude * 180 / Math.PI;
 
                 // format sunset time from the Date object
-                var sunsetStr = times.sunset.getHours() + ':' + times.sunset.getMinutes();
+                sunsetStr = times.sunset.getHours() + ':' + times.sunset.getMinutes();
 
                 // get position of the sun (azimuth and altitude) at today's sunrise
                 var sunsetPos = SunCalc.getPosition(times.sunset, lat, lng);
 
                 // azimuth in degrees
-                var sunsetAzimuth = convertDeg(sunsetPos.azimuth * 180 / Math.PI);
+                sunsetAzimuth = convertDeg(sunsetPos.azimuth * 180 / Math.PI);
                 
                 var element = document.getElementById('suncalc');
                 element.innerHTML = 'CURRENT - date time: '    + currentDate            + '<br />' +
@@ -112,7 +121,6 @@ SproutLoop.com
                                     '        - Altitude: '     + currentAltitude        + '<br />' +
                                     'SUNRISE time: '           + sunriseStr             + '<br />' +
                                     '        - Azimuth: '      + sunriseAzimuth         + '<br />' +
-                                    '        - Altitude: '     + sunriseAltitude        + '<br />' +
                                     'SUNSET time: '            + sunsetStr              + '<br />' +
                                     '        - Azimuth: '      + sunsetAzimuth          + '<br />';
 
