@@ -149,7 +149,9 @@ SproutLoop.com
                             timeStamp = new Date(data.hourly.data[0].time * 1000);
                             hour = timeStamp.getHours();
                             //$("body").append(hour);
-                            $("body").append('<h1>'+data.hourly.data[14].summary+'</h1>');   
+                            //$("body").append('<h1>'+data.hourly.data[14].summary+'</h1>');
+                            var element = document.getElementById('forecast');
+                            element.innerHTML = 'forecast: '    +data.hourly.data[14].summary';  
                         }
                     });
             }
@@ -237,6 +239,9 @@ SproutLoop.com
         <br>
         <h1> GEOLOCATION INFO: </h1>
         <p id="geolocation">Finding geolocation...</p>
+        <br>
+        <h1> FORECAST INFO: </h1>
+        <p id="forecast">forecast...</p>
         <br>
         <h1> SUNCALC INFO: </h1>
         <p id="suncalc">suncalc...</p>
