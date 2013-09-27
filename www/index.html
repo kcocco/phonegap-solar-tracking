@@ -132,10 +132,12 @@ SproutLoop.com
                 drawCompass(1);
             }
 
-
             // ***************************************************************
             //forecast.io weather call
             function getWeather() {
+                cloudCoverArray = [];
+                precipProbabilityArray = [];
+                windSpeedArray =[];
                 var month = (currentDate.getMonth()+1);
                 if(month <= 9) {month = '0'+month};
                 var day = currentDate.getDate();
@@ -148,7 +150,17 @@ SproutLoop.com
                         timeStamp = new Date(data.hourly.data[0].time * 1000);
                         hour = timeStamp.getHours();
                         var element = document.getElementById('forecast');
-                        element.innerHTML = 'forecast: '    +data.hourly.data[14].summary;  
+                        element.innerHTML = 'forecast: '    +data.hourly.data[14].summary;
+                        i = sunriseHour;
+                        while (i<=sunsetHour) {
+                            cloudCoverArray.push(string(data.hourly.data[i].cloudCover));
+                            precipProbabilityArray.push(string(data.hourly.data[i].precipProbability));
+                            windSpeedArray.push(string(data.hourly.data[i].windSpeed));
+                            i++;
+                        }
+                        //alert(cloudCoverArray.join('\n'))
+                        //alert(precipProbabilityArray.join('\n'))
+                        //alert(windSpeedArray.join('\n'))  
                     }
                 });
             }
