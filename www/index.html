@@ -45,8 +45,8 @@
             // device APIs are available call geo
             //
             function onDeviceReady() {
-                //navigator.compass.getCurrentHeading(onSuccessCompass, onErrorCompass);
-                navigator.geolocation.getCurrentPosition(onSuccessGeo, onErrorGeo);
+                navigator.compass.getCurrentHeading(onSuccessCompass, onErrorCompass);
+                //navigator.geolocation.getCurrentPosition(onSuccessGeo, onErrorGeo);
             }
 
             // onSuccess: Get the current heading
@@ -83,7 +83,7 @@
                 var window.currentDate = new Date();
                 var window.lat = position.coords.latitude;
                 var window.lng = position.coords.longitude;
-                var window.heading = 0;
+                var window.heading = 1;
                 //drawGraphics(1);
                 //startWatch();                               
             }
@@ -204,7 +204,6 @@
             function onError(compassError) {
                 alert('Compass error: ' + compassError.code);
             }
-    
 
        </script>
     </head>
