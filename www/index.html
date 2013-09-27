@@ -188,8 +188,11 @@ SproutLoop.com
             function onSuccess(heading) {
                 var element = document.getElementById('heading');
                 element.innerHTML = 'Heading: ' + heading.magneticHeading;
+                currentHeading = heading.magneticHeading;
                 // alignmentGauge(refresh, azimuth, heading, sunRiseAngle, sunSetAngle, sunRiseTime, sunSetTime)
-                alignmentGauge(0,200,heading.magneticHeading,64,292,"5:67","9:11");
+                //alignmentGauge(0,200,heading.magneticHeading,64,292,"5:67","9:11");
+                drawCompass(0);
+                
             }
 
             // onError: Failed to get the heading
