@@ -24,17 +24,11 @@ SproutLoop.com
                 var currentAzimuth;        
                 var currentAltitude; 
                 var sunriseStr;
-                var sunriseHour;
                 var sunriseAzimuth;
                 var sunsetStr;
-                var sunsetHour;
                 var sunsetAzimuth;
                 //compass
-                var currentHeading = 1;
-                //forecast
-                var cloudCoverArray = [];
-                var precipProbabilityArray = [];
-                var windSpeedArray =[]; 
+                var currentHeading = 1; 
 
             // Wait for device API libraries to load
             //
@@ -107,8 +101,6 @@ SproutLoop.com
                 // format sunrise time from the Date object
                 sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
 
-                sunriseHour = times.sunrise.getHours();
-
                 // get position of the sun (azimuth and altitude) at today's sunrise
                 sunrisePos = SunCalc.getPosition(times.sunrise, lat, lng);
 
@@ -120,8 +112,6 @@ SproutLoop.com
 
                 // format sunset time from the Date object
                 sunsetStr = times.sunset.getHours() + ':' + times.sunset.getMinutes();
-
-                sunsetHour = times.sunset.getHours();
 
                 // get position of the sun (azimuth and altitude) at today's sunrise
                 var sunsetPos = SunCalc.getPosition(times.sunset, lat, lng);
@@ -146,9 +136,6 @@ SproutLoop.com
             // ***************************************************************
             //forecast.io weather call
             function getWeather() {
-                cloudCoverArray = [];
-                precipProbabilityArray = [];
-                windSpeedArray =[];
                 var month = (currentDate.getMonth()+1);
                 if(month <= 9) {month = '0'+month};
                 var day = currentDate.getDate();
@@ -161,17 +148,7 @@ SproutLoop.com
                         timeStamp = new Date(data.hourly.data[0].time * 1000);
                         hour = timeStamp.getHours();
                         var element = document.getElementById('forecast');
-                        element.innerHTML = 'forecast: '    +data.hourly.data[14].summary;
-                        i = sunriseHour;
-                        while (i<=sunsetHour) {
-                            cloudCoverArray.push(data.hourly.data[i].cloudCover);
-                            precipProbabilityArray.push(data.hourly.data[i].precipProbability);
-                            windSpeedArray.push(data.hourly.data[i].windSpeed);
-                            i++;
-                        }
-                        //alert(cloudCoverArray.join('\n'))
-                        //alert(precipProbabilityArray.join('\n'))
-                        //alert(windSpeedArray.join('\n'))  
+                        element.innerHTML = 'forecast: '    +data.hourly.data[14].summary;  
                     }
                 });
             }
@@ -179,16 +156,14 @@ SproutLoop.com
             // ***************************************************************
             //raphaelDraw Altitude and weather
             function drawAltitude(update) {
-                //var windSpeedArray =["33.35", "24.6", "5.89", "5.05", "24.72", "3.44", "4.73", "8.24", "8.73", "8.08", "18.86","9.18", "18.49","8.75","6.56","40.32"]
-                //var precipProbabilityArray = ["0.01","0.03","0.005","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"]
-                //var cloudCoverArray = ["0.46","0.5","0.41","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"]
+                var windSpeedArray =["33.35", "24.6", "5.89", "5.05", "24.72", "3.44", "4.73", "8.24", "8.73", "8.08", "18.86","9.18", "18.49","8.75","6.56","40.32"]
+                var precipProbabilityArray = ["0.01","0.03","0.005","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"]
+                var cloudCoverArray = ["0.46","0.5","0.41","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"]
                 var altitudeArray = ["-3", "5", "15", "26", "37", "49", "59", "68", "72", "67", "58", "47", "36", "25", "14", "3"];
                 if (update==1) {
                     init_altitudeForecast("altitudeForecast");
                 }
-                formattedTime = currentTime.getHours()+':'+currentTime.getMinutes();
-                //altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, altitudeArray, UTCoffset, cloudCoverArray, precipProbabilityArray, windSpeedArray)
-                altitudeForecast(update,sunriseStr,sunsetStr,formattedTime,60,altitudeArray,-21600,cloudCoverArray,precipProbabilityArray,windSpeedArray);
+                altitudeForecast(update,"5:59","20:50","15:15",60,altitudeArray,-21600,cloudCoverArray,precipProbabilityArray,windSpeedArray);
             }
             
             // ***************************************************************
