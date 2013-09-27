@@ -136,24 +136,21 @@ SproutLoop.com
             // ***************************************************************
             //forecast.io weather call
             function getWeather() {
-                //var currentDate = new Date();
                 var month = (currentDate.getMonth()+1);
                 if(month <= 9) {month = '0'+month};
                 var day = currentDate.getDate();
                 if(day <= 9) {day = '0'+day};
                 var datetimestr= currentDate.getFullYear()+'-'+month+'-'+day+'T00:00:00-0000';
-                    $.ajax({
-                        url: 'https://api.forecast.io/forecast/518926582ed0412bfdb8b861e67934c3/40.5,-111.8,'+datetimestr,
-                        dataType: 'jsonp',
-                        success: function(data){
-                            timeStamp = new Date(data.hourly.data[0].time * 1000);
-                            hour = timeStamp.getHours();
-                            //$("body").append(hour);
-                            //$("body").append('<h1>'+data.hourly.data[14].summary+'</h1>');
-                            var element = document.getElementById('forecast');
-                            element.innerHTML = 'forecast: '    +data.hourly.data[14].summary';  
-                        }
-                    });
+                $.ajax({
+                    url: 'https://api.forecast.io/forecast/518926582ed0412bfdb8b861e67934c3/40.5,-111.8,'+datetimestr,
+                    dataType: 'jsonp',
+                    success: function(data){
+                        timeStamp = new Date(data.hourly.data[0].time * 1000);
+                        hour = timeStamp.getHours();
+                        var element = document.getElementById('forecast');
+                        element.innerHTML = 'forecast: '    +data.hourly.data[14].summary;  
+                    }
+                });
             }
 
             // ***************************************************************
