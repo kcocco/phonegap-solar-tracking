@@ -20,6 +20,8 @@ function init_alignmentGauge(elementId){
       heading_font = 33;
       degrees_font =14;
       suntime_font =16;
+      console.log("centerY " + centerY);
+      console.log("radius " + radius);
 }
 
 function drawArc(r, centerX, centerY, radius, startAngle, endAngle) {
@@ -71,25 +73,24 @@ function alignmentGauge(refresh,sunAngle,ovenAngle,sunRiseAngle,sunSetAngle,sunR
       var displayOvenAngle = ((ovenAngle+90)%360);
       //console.log("displayOvenAngle " + displayOvenAngle);
       console.log("centerY " + centerY);
+      console.log("radius " + radius);
 
       //var displayOvenAngle = ((ovenAngle)%360);
 
       // refresh = 1(yes draw entire compass) 0(draw only update items compass and sun)
       if (parseInt(refresh) == 1) {
-      	  paper.clear() 
+     	  paper.clear() 
 	      // Draw Compass Outer Dial
 	      var compassDial = paper.set();
 	      compassDial.push(paper.circle(centerX, centerY, radius+outering).attr({fill:'black'}));
-      
-	      // Draw Compass Headings and marks
+        // Draw Compass Headings and marks
 	      var fontAttr = {font:'12px Verdana','font-size':heading_font,'text-anchor':'middle',fill:'white',stroke:"white"};
 	      var headingDiff = 20;
 	      compassDial.push(paper.text( centerX, centerY+radius+headingDiff, "N").attr(fontAttr));
 	      compassDial.push(paper.text( centerX, centerY-radius-headingDiff, "S").attr(fontAttr));
 	      compassDial.push(paper.text( centerX+radius+headingDiff, centerY, "W").attr(fontAttr).rotate(90));
 	      compassDial.push(paper.text( centerX-radius-headingDiff, centerY, "E").attr(fontAttr).rotate(-90));
-      
-	      var tickLength=22;
+        var tickLength=22;
 	      var tickLengthSmall=8;
 	      var tickAttr = {fill:'white',stroke:"white","stroke-width":2};
 	      var tickAngle=0;
@@ -101,17 +102,15 @@ function alignmentGauge(refresh,sunAngle,ovenAngle,sunRiseAngle,sunSetAngle,sunR
 	        if (tickAngle%90!=0) {compassDial.push(paper.path([['M',centerX, centerY+radius],['L',centerX, centerY+radius+tickLength]]).attr(tickAttr))}
 	        compassDial.rotate(10,centerX,centerY);
 	        if ((textAngle-10)%90!=0) {
-	            compassDial.push(paper.text( centerX, centerY-radius-degreeDiff, textAngle-10).attr(fontNumberAttr))
-			    compassDial.push(paper.path([['M',centerX, centerY+radius],['L',centerX, centerY+radius+tickLengthSmall]]).attr(tickAttr))
-			}
-            
+	           compassDial.push(paper.text( centerX, centerY-radius-degreeDiff, textAngle-10).attr(fontNumberAttr))
+			       compassDial.push(paper.path([['M',centerX, centerY+radius],['L',centerX, centerY+radius+tickLengthSmall]]).attr(tickAttr))
+			    }
 	        compassDial.rotate(-(tickAngle+10+180),centerX,centerY);
 	        tickAngle = tickAngle + 20;
 	        textAngle = textAngle-20
 	      }
-
-		  // Arc - Pies
-		  var sunArc = paper.set();
+		    // Arc - Pies
+		    var sunArc = paper.set();
 	      var sunArc = drawPie(sunArc, centerX, centerY, radius, 180+sunRiseAngle, sunSetAngle-180);
 	      sunArc.attr({fill:'yellow'});
 	      var nightArc = paper.set();
@@ -122,10 +121,10 @@ function alignmentGauge(refresh,sunAngle,ovenAngle,sunRiseAngle,sunSetAngle,sunR
 	      nightArc.rotate(270-sunSetAngle,centerX,centerY)
 	      nightArc.push(paper.text( centerX+radius/2+6, centerY+8, sunSetTime).attr(fontRiseSetAttr))
 	      nightArc.rotate(-(90-sunSetAngle),centerX,centerY)
-		  nightArc.rotate(270-sunRiseAngle,centerX,centerY)
+		    nightArc.rotate(270-sunRiseAngle,centerX,centerY)
 	      nightArc.push(paper.text( centerX-radius/2-6, centerY+8, sunRiseTime+" am").attr(fontRiseSetAttr))
 	      nightArc.rotate(-(90-sunRiseAngle),centerX,centerY)
-	  }
+	    }
       
       else {	// refresh != 1 ... only refresh arms and oven
         //alert (window.armsSunCompass);
@@ -133,7 +132,7 @@ function alignmentGauge(refresh,sunAngle,ovenAngle,sunRiseAngle,sunSetAngle,sunR
         window.oven.remove();
       }
       window.armsSunCompass = paper.set();
-	  window.oven = paper.set();
+	    window.oven = paper.set();
       
       // Draw Oven Angle Line
       var temppath = ["M", centerX,centerY, "L", Math.cos(displayOvenAngle*(Math.PI/180))*radius+centerX, Math.sin(displayOvenAngle*(Math.PI/180))*radius+centerY].join(' ');
@@ -153,6 +152,5 @@ function alignmentGauge(refresh,sunAngle,ovenAngle,sunRiseAngle,sunSetAngle,sunR
       window.oven.attr("stroke", "black");
       window.oven.attr("stroke-width",1);
       // rotate oven
-       window.oven.rotate(displayOvenAngle-90, centerX, centerY);      
-      //window.oven.rotate(displayOvenAngle, centerX, centerY);      
+      window.oven.rotate(displayOvenAngle-90, centerX, centerY);      
 }
