@@ -3,7 +3,7 @@ function init_alignmentGauge(elementId){
   //<script src="raphael-min.js" type="text/javascript"></script>
       // Creates canvas 320 × 200 at 10, 50
       paper = Raphael(elementId, 360, 360);
-      c = paper.rect(0, 0, 360, 360, 10);
+      // c = paper.rect(0, 0, 360, 360, 10);
       centerX = paper.width/2;
       centerY = paper.height/2;
       outering = 42;
