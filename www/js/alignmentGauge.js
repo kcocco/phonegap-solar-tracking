@@ -20,8 +20,6 @@ function init_alignmentGauge(elementId){
       heading_font = 33;
       degrees_font =14;
       suntime_font =16;
-      console.log("centerY " + centerY);
-      console.log("radius " + radius);
 }
 
 function drawArc(r, centerX, centerY, radius, startAngle, endAngle) {
