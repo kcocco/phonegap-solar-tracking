@@ -72,9 +72,6 @@ function alignmentGauge(refresh,sunAngle,ovenAngle,sunRiseAngle,sunSetAngle,sunR
       var displaySunAngle = ((sunAngle+90)%360);
       var displayOvenAngle = ((ovenAngle+90)%360);
       //console.log("displayOvenAngle " + displayOvenAngle);
-      console.log("centerY " + centerY);
-      console.log("radius " + radius);
-
       //var displayOvenAngle = ((ovenAngle)%360);
 
       // refresh = 1(yes draw entire compass) 0(draw only update items compass and sun)
