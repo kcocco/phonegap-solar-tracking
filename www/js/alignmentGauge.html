@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>alignmentGauge</title>
+ </head>
+ <body>
+  
+  <script src="raphael-min.js" type="text/javascript"></script>
+  <script src="alignmentGauge.js" type="text/javascript"></script>
+  <script type="text/javascript">
+   function autorun()
+   {
+      init_alignmentGauge("alignmentGauge");
+      // alignmentGauge(refresh, azimuth, heading, sunRiseAngle, sunSetAngle, sunRiseTime, sunSetTime)
+      //alignmentGauge(1,200,250,64,292,"5:67","9:11");
+      alignmentGauge(1,200,250,100,260,"5:67","9:11");
+      alignmentGauge(0,30,190.923123,64,292,"5:32","9:15");
+      alignmentGauge(0,95,13.123,64,292,"5:32","9:15");
+
+
+   }
+   if (window.addEventListener) window.addEventListener("load", autorun, false);
+   else if (window.attachEvent) window.attachEvent("onload", autorun);
+   else window.onload = autorun;
+  </script>
+  <p> html text... </p>
+  <br>
+  <div id="alignmentGauge"></div>
+ </body>
+</html>

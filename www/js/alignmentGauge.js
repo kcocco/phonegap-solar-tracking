@@ -59,7 +59,7 @@ function drawPie(r, centerX, centerY, radius, startAngle, endAngle) {
         else if (startAngle>180 && endAngle>180)
             flg1 = 0;
         else if (startAngle<180 && endAngle>180)
-            flg1 = 0; // edited for bugfix here, previously this was 1
+            flg1 = 1; // edited for bugfix here, previously this was 1
         else if (startAngle>180 && endAngle<180)
             flg1 = 1;
 
