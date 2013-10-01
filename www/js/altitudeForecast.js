@@ -192,7 +192,7 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
         window.timeAltOverlay.remove();  
       }
       window.timeAltOverlay = alt_paper.set();
-      if (currentTimeSplit >= sunRiseSplit && currentTimeSplit <= sunSetSplit) {
+      if ((currentTimeSplit >= sunRiseSplit) && (currentTimeSplit <= sunSetSplit)) {
         //draw sun overlay
         columnTimeRatio = columnWidth/60;
         //console.log("altitudeForecast vars:"+currentTimeSplit[0]+" : "+ sunRiseSplit[0] +" : "+ columnWidth +" : "+ columnTimeRatio +" : "+ currentTimeSplit[1]);
