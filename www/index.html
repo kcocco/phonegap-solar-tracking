@@ -143,6 +143,8 @@ SproutLoop.com
                 cloudCoverArray = [];
                 precipProbabilityArray = [];
                 windSpeedArray =[];
+                var sunriseHour = sunriseStr.split(":")[0];
+                var sunsetHour = sunsetStr.split(":")[0];
                 var month = (currentDate.getMonth()+1);
                 if(month <= 9) {month = '0'+month};
                 var day = currentDate.getDate();
@@ -163,7 +165,7 @@ SproutLoop.com
                             windSpeedArray.push(string(data.hourly.data[i].windSpeed));
                             i++;
                         }
-                        console.log(cloudCoverArray.join('\n'));
+                        console.log('in getweather cloudCoverArray:'+cloudCoverArray);
                         //alert(cloudCoverArray.join('\n'))
                         //alert(precipProbabilityArray.join('\n'))
                         //alert(windSpeedArray.join('\n'))  
@@ -180,7 +182,7 @@ SproutLoop.com
                 var altitudeArray = ["-3", "5", "15", "26", "37", "49", "59", "68", "72", "67", "58", "47", "36", "25", "14", "3"];
                 if (update==1) {
                     getWeather();
-                    console.log('cloudCoverArray:'+cloudCoverArray);
+                    console.log('in drawalt cloudCoverArray:'+cloudCoverArray);
                     init_altitudeForecast("altitudeForecast");
                 }
 
