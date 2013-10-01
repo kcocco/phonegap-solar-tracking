@@ -1,8 +1,7 @@
  // Javascript
 function init_altitudeForecast(elementId){
   //<script src="raphael-min.js" type="text/javascript"></script>
-      alt_paper = Raphael(elementId, 640, 360);
-      
+      alt_paper = Raphael(elementId, 640, 360);     
 }
 
 function calcTime(UTCoffset) {

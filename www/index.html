@@ -27,6 +27,8 @@ SproutLoop.com
                 var sunriseAzimuth;
                 var sunsetStr;
                 var sunsetAzimuth;
+                var sunriseHour;
+                var sunsetHour; 
                 //compass
                 var currentHeading = 1;
                 //weather
@@ -124,6 +126,20 @@ SproutLoop.com
                 // azimuth in degrees
                 sunsetAzimuth = convertDeg(sunsetPos.azimuth * 180 / Math.PI);
                 
+                sunriseHour = parseInt(sunriseStr.split(":")[0]);
+                sunsetHour = parseInt(sunsetStr.split(":")[0]);
+                // Build Altitude array
+                i = sunriseHour;
+                    while (i<=sunsetHour) {
+                        var d = new Date();
+                        d.setHours(i,30,0);
+                        tempPos = SunCalc.getPosition(d, lat, lng);
+                        // azimuth in degrees
+                        tempAzimuth = convertDeg(tempPos.azimuth * 180 / Math.PI);
+                        altitudeArray.push(tempAzimuth);
+                        i++;
+                    }
+
                 var element = document.getElementById('suncalc');
                 element.innerHTML = 'CURRENT - date time: '    + currentDate            + '<br />' +
                                     '        - Azimuth: '      + currentAzimuth         + '<br />' +
@@ -132,9 +148,11 @@ SproutLoop.com
                                     '        - Azimuth: '      + sunriseAzimuth         + '<br />' +
                                     'SUNSET time: '            + sunsetStr              + '<br />' +
                                     '        - Azimuth: '      + sunsetAzimuth          + '<br />';
-                getWeather();
+                
                 drawCompass(1);
-                drawAltitude(1);
+                getWeather();
+                //drawAltitude(1);
+                
             }
 
             // ***************************************************************
@@ -182,7 +200,7 @@ SproutLoop.com
                 //var windSpeedArray =["33.35", "24.6", "5.89", "5.05", "24.72", "3.44", "4.73", "8.24", "8.73", "8.08", "18.86","9.18", "18.49","8.75","6.56","40.32"];
                 //var precipProbabilityArray = ["0.01","0.03","0.005","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"];
                 //var cloudCoverArray = ["0.46","0.5","0.41","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"];
-                var altitudeArray = ["-3", "5", "15", "26", "37", "49", "59", "68", "72", "67", "58", "47", "36", "25", "14", "3"];
+                //var altitudeArray = ["-3", "5", "15", "26", "37", "49", "59", "68", "72", "67", "58", "47", "36", "25", "14", "3"];
                 if (update==1) {
                     //getWeather();
                     console.log('in drawalt cloudCoverArray:'+cloudCoverArray);
