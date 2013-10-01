@@ -184,9 +184,9 @@ SproutLoop.com
             function drawCompass(update) {
             // alignmentGauge(refresh, azimuth, heading, sunRiseAngle, sunSetAngle, sunRiseTime, sunSetTime)
                 if (update==1) {
-                    init_alignmentGauge("alignmentGauge");
-                    //alignmentGauge(1,200,250,64,292,"5:67","9:11");
+                    init_alignmentGauge("alignmentGauge");     
                 }
+                //alignmentGauge(1,200,250,64,292,"5:67","9:11");
                 //alignmentGauge(0,95,13.123,64,292,"5:32","9:15");
                 alignmentGauge(update,currentAzimuth,currentHeading,sunriseAzimuth,sunsetAzimuth,sunriseStr,sunsetStr);
                 //alignmentGauge(update,currentAzimuth,currentHeading,93,266,sunriseStr,sunsetStr);
@@ -209,7 +209,7 @@ SproutLoop.com
             function startWatch() {
                 // Update compass every 3 seconds
                 var options = { frequency: 1000 };
-                watchID = navigator.compass.watchHeading(onSuccess, onError, options);
+                watchID = navigator.compass.watchHeading(onSuccessWatch, onError, options);
             }
 
             // Stop watching the compass
@@ -223,7 +223,7 @@ SproutLoop.com
 
             // onSuccess: Get the current heading
             //
-            function onSuccess(heading) {
+            function onSuccessWatch(heading) {
                 var element = document.getElementById('heading');
                 element.innerHTML = 'Heading: ' + heading.magneticHeading;
                 currentHeading = heading.magneticHeading;
