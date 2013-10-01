@@ -29,16 +29,13 @@
         By default PhoneGap Build builds your application for every platform. If you only want to build for certain platforms you can 
         specify these platforms with the gap:platform tag.
         <gap:platform />:You can have zero or more of these elements present in your config.xml. If you specify none, all platforms will be built.
-    
+    -->   
     <gap:platform name="ios" />
-    -->
     <gap:platform name="android" />
-    <!--
     <gap:platform name="webos" />
     <gap:platform name="symbian" />
     <gap:platform name="blackberry" />
     <gap:platform name="winphone" />
-    -->
 
     <!--
         If you do not want any permissions to be added to your app, add the
