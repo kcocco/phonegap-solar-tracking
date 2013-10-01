@@ -160,10 +160,11 @@ SproutLoop.com
                         element.innerHTML = 'forecast: '    +data.hourly.data[14].summary;
                         i = sunriseHour;
                         while (i<=sunsetHour) {
+                            console.log("i="+i+"  sunsetHour:"+sunsetHour);
                             console.log("data.hourly.data[i].cloudCover:"+data.hourly.data[i].cloudCover);
-                            cloudCoverArray.push(string(data.hourly.data[i].cloudCover));
-                            precipProbabilityArray.push(string(data.hourly.data[i].precipProbability));
-                            windSpeedArray.push(string(data.hourly.data[i].windSpeed));
+                            cloudCoverArray.push(data.hourly.data[i].cloudCover);
+                            precipProbabilityArray.push(data.hourly.data[i].precipProbability);
+                            windSpeedArray.push(data.hourly.data[i].windSpeed);
                             i++;
                         }
                         console.log('in getweather cloudCoverArray:'+cloudCoverArray);
