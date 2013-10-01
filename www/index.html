@@ -135,8 +135,8 @@ SproutLoop.com
                         d.setHours(i,30,0);
                         tempPos = SunCalc.getPosition(d, lat, lng);
                         // azimuth in degrees
-                        tempAzimuth = convertDeg(tempPos.azimuth * 180 / Math.PI);
-                        altitudeArray.push(tempAzimuth);
+                        tempAltitude = convertDeg(tempPos.altitude * 180 / Math.PI);
+                        altitudeArray.push(tempAltitude);
                         i++;
                     }
 
