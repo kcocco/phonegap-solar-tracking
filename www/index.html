@@ -166,7 +166,8 @@ SproutLoop.com
                             precipProbabilityArray.push(data.hourly.data[i].precipProbability);
                             windSpeedArray.push(data.hourly.data[i].windSpeed);
                             i++;
-                        }
+                        },
+                        async: false 
                         console.log('in getweather cloudCoverArray:'+cloudCoverArray);
                         //alert(cloudCoverArray.join('\n'))
                         //alert(precipProbabilityArray.join('\n'))
