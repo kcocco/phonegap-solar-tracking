@@ -30,10 +30,10 @@ SproutLoop.com
                 //compass
                 var currentHeading = 1;
                 //weather
-                var windSpeedArray =[];
-                var precipProbabilityArray = [];
-                var window.cloudCoverArray = [];
-                var altitudeArray = []; 
+                var windSpeedArray = new Array();
+                var precipProbabilityArray = new Array();
+                var cloudCoverArray = new Array();
+                var altitudeArray = new Array();
 
             // Wait for device API libraries to load
             //
@@ -140,7 +140,7 @@ SproutLoop.com
             // ***************************************************************
             //forecast.io weather call
             function getWeather() {
-                window.cloudCoverArray = [];
+                cloudCoverArray = [];
                 precipProbabilityArray = [];
                 windSpeedArray =[];
                 var sunriseHour = parseInt(sunriseStr.split(":")[0]);
@@ -162,12 +162,12 @@ SproutLoop.com
                         while (i<=sunsetHour) {
                             console.log("i="+i+"  sunsetHour:"+sunsetHour);
                             console.log("data.hourly.data[i].cloudCover:"+data.hourly.data[i].cloudCover);
-                            window.cloudCoverArray.push(data.hourly.data[i].cloudCover);
+                            cloudCoverArray.push(data.hourly.data[i].cloudCover);
                             precipProbabilityArray.push(data.hourly.data[i].precipProbability);
                             windSpeedArray.push(data.hourly.data[i].windSpeed);
                             i++;
                         }
-                        console.log('in getweather cloudCoverArray:'+window.cloudCoverArray);
+                        console.log('in getweather cloudCoverArray:'+cloudCoverArray);
                         //alert(cloudCoverArray.join('\n'))
                         //alert(precipProbabilityArray.join('\n'))
                         //alert(windSpeedArray.join('\n'))  
@@ -184,13 +184,13 @@ SproutLoop.com
                 var altitudeArray = ["-3", "5", "15", "26", "37", "49", "59", "68", "72", "67", "58", "47", "36", "25", "14", "3"];
                 if (update==1) {
                     //getWeather();
-                    console.log('in drawalt cloudCoverArray:'+window.cloudCoverArray);
+                    console.log('in drawalt cloudCoverArray:'+cloudCoverArray);
                     init_altitudeForecast("altitudeForecast");
                 }
 
                 // altitudeForecast(refresh, sunrise, sunset, currentTime, currentAltitude, altitudeArry,UTCoffset,cloudCoverArray,precipProbabilityArray,windSpeedArray)
                 // altitudeForecast(update,"5:59","20:50","15:15",60,altitudeArray,-21600,cloudCoverArray,precipProbabilityArray,windSpeedArray);
-                altitudeForecast(update,sunriseStr,sunsetStr,"15:15",60,altitudeArray,-21600,window.cloudCoverArray,precipProbabilityArray,windSpeedArray);
+                altitudeForecast(update,sunriseStr,sunsetStr,"15:15",60,altitudeArray,-21600,cloudCoverArray,precipProbabilityArray,windSpeedArray);
             }
             
             // ***************************************************************
