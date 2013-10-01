@@ -132,7 +132,7 @@ SproutLoop.com
                                     '        - Azimuth: '      + sunriseAzimuth         + '<br />' +
                                     'SUNSET time: '            + sunsetStr              + '<br />' +
                                     '        - Azimuth: '      + sunsetAzimuth          + '<br />';
-                //getWeather();
+                getWeather();
                 drawCompass(1);
                 drawAltitude(1);
             }
@@ -183,7 +183,7 @@ SproutLoop.com
                 //var cloudCoverArray = ["0.46","0.5","0.41","0.41","0.47","0.57","0.54","0.54","0.57","0.53","0.57","0.58","0.57","0.6","0.63","0.58"];
                 var altitudeArray = ["-3", "5", "15", "26", "37", "49", "59", "68", "72", "67", "58", "47", "36", "25", "14", "3"];
                 if (update==1) {
-                    getWeather();
+                    //getWeather();
                     console.log('in drawalt cloudCoverArray:'+cloudCoverArray);
                     init_altitudeForecast("altitudeForecast");
                 }
