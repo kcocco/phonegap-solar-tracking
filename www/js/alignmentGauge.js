@@ -27,8 +27,8 @@ function drawArc(r, centerX, centerY, radius, startAngle, endAngle) {
         var startY = centerY-radius*Math.sin((90-startAngle)*Math.PI/180);
         var endX = centerX+radius*Math.cos((90-endAngle)*Math.PI/180); 
         var endY = centerY-radius*Math.sin((90-endAngle)*Math.PI/180);
-        var flg1 = 0;
-
+        var flg1 = 0;    
+        
         if (startAngle>endAngle)
             flg1 = 1;
         else if (startAngle<180 && endAngle<180)
@@ -50,16 +50,22 @@ function drawPie(r, centerX, centerY, radius, startAngle, endAngle) {
         var endY = centerY-radius*Math.sin((90-endAngle)*Math.PI/180);
         var flg1 = 0;
 
-        if (startAngle>endAngle)
+        if (startAngle>endAngle && endAngle>90)
             flg1 = 1;
-        else if (startAngle<180 && endAngle<180)
+        else if (startAngle>endAngle && endAngle<90)
             flg1 = 0;
-        else if (startAngle>180 && endAngle>180)
+        else if (startAngle<endAngle && startAngle>90)
             flg1 = 0;
-        else if (startAngle<180 && endAngle>180)
-            flg1 = 1; // edited for bugfix here, previously this was 1
-        else if (startAngle>180 && endAngle<180)
+        else if (startAngle<endAngle && startAngle<90)
             flg1 = 1;
+
+        
+        //alert('centerx:'+centerX +' centery:'+ centerY+' radius:'+ radius+' startingAngle:'+ startAngle+' endingAngle:'+ endAngle+' flg1:'+flg1);
+
+        // from: http://www.w3.org/TR/SVG/paths.html#PathData
+        // A (rx ry x-axis-rotation large-arc-flag sweep-flag x y)
+        // Draws an elliptical arc from the current point to (x, y). The size and orientation of the ellipse are defined by two radii (rx, ry) and an x-axis-rotation, which indicates how the ellipse as a whole is rotated relative to the current coordinate system. The center (cx, cy) of the ellipse is calculated automatically to satisfy the constraints imposed by the other parameters. large-arc-flag and sweep-flag contribute to the automatic calculations and help determine how the arc is drawn.
+
 
         return r.push(paper.path([['M',startX, startY],['A',radius,radius,0,flg1,1,endX,endY],['L',centerX,centerY],['L',startX, startY]]));
 }
