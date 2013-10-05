@@ -1,8 +1,7 @@
  // Javascript
 function init_altitudeForecast(elementId){
   //<script src="raphael-min.js" type="text/javascript"></script>
-      alt_paper = Raphael(elementId, 640, 360);
-      
+      alt_paper = Raphael(elementId, 640, 360);     
 }
 
 function calcTime(UTCoffset) {
@@ -76,13 +75,15 @@ Raphael.fn.roundedRectangle = function (x, y, w, h, r1, r2, r3, r4){
 //    var paper = Raphael("canvas", 840, 480);
 //    paper.roundedRectangle(10, 10, 80, 80, 0, 10, 25, 5).attr({fill: "#f00"});
 
+// UTC = 9999 off uses passing in currentTime
 function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, altitudeArray, UTCoffset, cloudCoverArray, precipProbabilityArray, windSpeedArray){
 
       console.log('altitudeForecast vars'+' * '+ refresh+' * '+ sunrise+' * '+ sunset+' * '+ currentTime +' * '+currentAlt +' * '+altitudeArray +' * '+cloudCoverArray +' * '+precipProbabilityArray+' * '+windSpeedArray);
       if (UTCoffset != 9999) {
         var currentTime = calcTime(UTCoffset);
-      }      
+      }
       var currentTimeSplit = currentTime.split(":");
+      alert ('currentTime'+currentTime);
       var sunRiseSplit = sunrise.split(":");
       var sunSetSplit = sunset.split(":");
       var numberTimeSlots = sunSetSplit[0]-sunRiseSplit[0]+2
@@ -195,22 +196,24 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
         window.timeAltOverlay.remove();  
       }
       window.timeAltOverlay = alt_paper.set();
-      //draw sun overlay
-      columnTimeRatio = columnWidth/60;
-      //console.log("altitudeForecast vars:"+currentTimeSplit[0]+" : "+ sunRiseSplit[0] +" : "+ columnWidth +" : "+ columnTimeRatio +" : "+ currentTimeSplit[1]);
-      // 15 : 5 : 37.64705882352941 : 0.6274509803921569 : 15
-      tempX = parseInt(((parseInt(currentTimeSplit[0])-parseInt(sunRiseSplit[0])+1)*columnWidth)-parseInt(columnTimeRatio*(60-currentTimeSplit[1])));
-      //alert ('tempX: '+tempX);
+      if ((currentTimeSplit >= sunRiseSplit) && (currentTimeSplit <= sunSetSplit)) {
+        //draw sun overlay
+        columnTimeRatio = columnWidth/60;
+        //console.log("altitudeForecast vars:"+currentTimeSplit[0]+" : "+ sunRiseSplit[0] +" : "+ columnWidth +" : "+ columnTimeRatio +" : "+ currentTimeSplit[1]);
+        // 15 : 5 : 37.64705882352941 : 0.6274509803921569 : 15
+        tempX = parseInt(((parseInt(currentTimeSplit[0])-parseInt(sunRiseSplit[0])+1)*columnWidth)-parseInt(columnTimeRatio*(60-currentTimeSplit[1])));
+        //alert ('tempX: '+tempX);
 
-      tempY = parseInt(alt_paper.height - (currentAlt * window.altScale) - columnWidth/2);
-      //console.log("altitudeForecast vars tempX:"+tempX+" tempY:"+tempY+" window.altScale:"+window.altScale);
+        tempY = parseInt(alt_paper.height - (currentAlt * window.altScale) - columnWidth/2);
+        //console.log("altitudeForecast vars tempX:"+tempX+" tempY:"+tempY+" window.altScale:"+window.altScale);
 
-      tempRadius = columnWidth/2+4;
-      var SunMarkerSunAttr = {"opacity":0.8,fill:"orange",stroke:"orange"};
-      var SunMarkerLineAttr = {"opacity":0.8,fill:'orange',stroke:"orange","stroke-width":6,"stroke-dasharray":"-"};
-      window.timeAltOverlay.push(alt_paper.circle(tempX, tempY, tempRadius).attr(SunMarkerSunAttr));
-      //draw time line
-      window.timeAltOverlay.push(alt_paper.path([['M',tempX,tempY],['L', tempX,alt_paper.height]]).attr(SunMarkerLineAttr));
-      //draw alt line
-      window.timeAltOverlay.push(alt_paper.path([['M',tempX,tempY],['L',alt_paper.width,tempY]]).attr(SunMarkerLineAttr));     
+        tempRadius = columnWidth/2+4;
+        var SunMarkerSunAttr = {"opacity":0.8,fill:"orange",stroke:"orange"};
+        var SunMarkerLineAttr = {"opacity":0.8,fill:'orange',stroke:"orange","stroke-width":6,"stroke-dasharray":"-"};
+        window.timeAltOverlay.push(alt_paper.circle(tempX, tempY, tempRadius).attr(SunMarkerSunAttr));
+        //draw time line
+        window.timeAltOverlay.push(alt_paper.path([['M',tempX,tempY],['L', tempX,alt_paper.height]]).attr(SunMarkerLineAttr));
+        //draw alt line
+        window.timeAltOverlay.push(alt_paper.path([['M',tempX,tempY],['L',alt_paper.width,tempY]]).attr(SunMarkerLineAttr));
+      }     
 }
