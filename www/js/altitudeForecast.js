@@ -75,10 +75,13 @@ Raphael.fn.roundedRectangle = function (x, y, w, h, r1, r2, r3, r4){
 //    var paper = Raphael("canvas", 840, 480);
 //    paper.roundedRectangle(10, 10, 80, 80, 0, 10, 25, 5).attr({fill: "#f00"});
 
+// UTC = 9999 off uses passing in currentTime
 function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, altitudeArray, UTCoffset, cloudCoverArray, precipProbabilityArray, windSpeedArray){
 
       console.log('altitudeForecast vars'+' * '+ refresh+' * '+ sunrise+' * '+ sunset+' * '+ currentTime +' * '+currentAlt +' * '+altitudeArray +' * '+cloudCoverArray +' * '+precipProbabilityArray+' * '+windSpeedArray);
-      var currentTime = calcTime(UTCoffset);
+      if (UTCoffset <> 9999) {
+        var currentTime = calcTime(UTCoffset);
+      }
       var currentTimeSplit = currentTime.split(":");
       var sunRiseSplit = sunrise.split(":");
       var sunSetSplit = sunset.split(":");
