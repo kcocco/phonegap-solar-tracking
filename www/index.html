@@ -49,6 +49,14 @@ SproutLoop.com
                 return degOut;
             }
 
+            // Padding string for time stamps
+            String.prototype.lpad = function(padString, length) {
+                var str = this;
+                while (str.length < length)
+                    str = padString + str;
+                return str;
+            }
+
             // device APIs are available call geo
             //
             function onDeviceReady() {
@@ -106,7 +114,7 @@ SproutLoop.com
                 var times = SunCalc.getTimes(currentDate, lat, lng);
 
                 // format sunrise time from the Date object
-                sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
+                sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes().lpad("0", 2);
 
                 // get position of the sun (azimuth and altitude) at today's sunrise
                 sunrisePos = SunCalc.getPosition(times.sunrise, lat, lng);
