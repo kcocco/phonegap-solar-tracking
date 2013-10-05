@@ -188,6 +188,8 @@ SproutLoop.com
                         hour = timeStamp.getHours();
                         var element = document.getElementById('forecast');
                         element.innerHTML = 'forecast: '    +data.hourly.data[14].summary;
+                        var element = document.getElementById('datetimestr');
+                        element.innerHTML = 'dateTimeStr: '    +datetimestr;
                         i = sunriseHour;
                         while (i<=sunsetHour) {
                             console.log("i="+i+"  sunsetHour:"+sunsetHour);
@@ -298,6 +300,7 @@ SproutLoop.com
         <br>
         <h1> FORECAST INFO (forecast.IO): </h1>
         <p id="forecast">forecast...</p>
+        <p id="datetimestr">DateTimeStr...</p>
         <br>
         <h1> SUNCALC INFO: </h1>
         <p id="suncalc">suncalc...</p>
