@@ -128,7 +128,9 @@ SproutLoop.com
                 //var sunriseAltitude = sunrisePos.altitude * 180 / Math.PI;
 
                 // format sunset time from the Date object
-                sunsetStr = times.sunset.getHours() + ':' + times.sunset.getMinutes();
+                tempMin = String(times.sunset.getMinutes());
+                tempMin = tempMin.lpad("0", 2);
+                sunsetStr = times.sunset.getHours() + ':' + tempMin;
 
                 // get position of the sun (azimuth and altitude) at today's sunrise
                 var sunsetPos = SunCalc.getPosition(times.sunset, lat, lng);
