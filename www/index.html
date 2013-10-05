@@ -114,7 +114,9 @@ SproutLoop.com
                 var times = SunCalc.getTimes(currentDate, lat, lng);
 
                 // format sunrise time from the Date object
-                sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes().lpad("0", 2);
+                tempMin = String(times.sunrise.getMinutes());
+                tempMin = tempMin.lpad("0", 2);
+                sunriseStr = times.sunrise.getHours() + ':' + tempMin;
 
                 // get position of the sun (azimuth and altitude) at today's sunrise
                 sunrisePos = SunCalc.getPosition(times.sunrise, lat, lng);
