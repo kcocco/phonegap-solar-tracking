@@ -1,24 +1,8 @@
  // Javascript
-
-
-//var w = 640;
-//var h = 360;
-var w = 640;
-var h = 360;
-
 function init_altitudeForecast(elementId){
-      alt_paper = Raphael(elementId, w, h);
-      //alt_paper = Raphael(elementId);
-      //var alt_paper = Raphael("wrap");
-      alt_paper.setViewBox(0,0,w,h,true);
-
-      // from: http://jsfiddle.net/AUNwC/44/
-      // ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
-      var svg = document.querySelector("svg");
-      svg.removeAttribute("width");
-      svg.removeAttribute("height");
-
-
+  //<script src="raphael-min.js" type="text/javascript"></script>
+      alt_paper = Raphael(elementId, 640, 360);
+      
 }
 
 function calcTime(UTCoffset) {
@@ -102,20 +86,20 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
       var sunRiseSplit = sunrise.split(":");
       var sunSetSplit = sunset.split(":");
       var numberTimeSlots = sunSetSplit[0]-sunRiseSplit[0]+2
-      var columnWidth = w/numberTimeSlots;
+      var columnWidth = alt_paper.width/numberTimeSlots;
       
       
       
       // refresh = 1(yes draw entire compass) 0(draw only update items compass and sun)
       if (parseInt(refresh) == 1) {
         alt_paper.clear()
-        c = alt_paper.rect(0, 0,w,h, 0);
+        c = alt_paper.rect(0, 0,alt_paper.width,alt_paper.height, 0);
         c.attr({fill:"black",stroke:"black"});
 
         //alt_paper.roundedRectangle(10, 10, 80, 80, 0, 10, 25, 5).attr({fill: "#f00"});
 
         var timeGrid =alt_paper.set();
-        var sunChartBottom =h-columnWidth/2
+        var sunChartBottom =alt_paper.height-columnWidth/2
         var topSunChart = 150;
         var timeTextSpace = 18;
         var topForecastSpace = timeTextSpace * 2;
@@ -132,7 +116,7 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
         window.altScale = (sunChartBottom-topSunChart)/maxAltitude;
         var TimeSlot = 1;
         while (TimeSlot<numberTimeSlots){
-          timeGrid.push(alt_paper.path([['M',TimeSlot*columnWidth,0],['L', TimeSlot*columnWidth,h]]).attr(TimeLineAttr)); 
+          timeGrid.push(alt_paper.path([['M',TimeSlot*columnWidth,0],['L', TimeSlot*columnWidth,alt_paper.height]]).attr(TimeLineAttr)); 
 
           if (TimeSlot == 1) {
             var tempHour = (TimeSlot+parseInt(sunRiseSplit[0])-1)+"am";
@@ -170,24 +154,24 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
         
         // Draw labels: TIME , RAIN, WIND
         var textLabelsAttr = {font:'12px Verdana','font-size':11,'text-anchor':'left',fill:'white',stroke:"white"};
-        timeGrid.push(alt_paper.text(w-columnWidth/2,timeTextSpace,"Time").attr(textLabelsAttr));
-        timeGrid.push(alt_paper.text(w-columnWidth/2,temp16percent+topForecastSpace,"Cloud").attr(textLabelsAttr));
-        timeGrid.push(alt_paper.text(w-columnWidth/2,temp16percent*3+topForecastSpace,"Rain").attr(textLabelsAttr));
-        timeGrid.push(alt_paper.text(w-columnWidth/2,temp16percent*5+topForecastSpace,"Wind").attr(textLabelsAttr));
+        timeGrid.push(alt_paper.text(alt_paper.width-columnWidth/2,timeTextSpace,"Time").attr(textLabelsAttr));
+        timeGrid.push(alt_paper.text(alt_paper.width-columnWidth/2,temp16percent+topForecastSpace,"Cloud").attr(textLabelsAttr));
+        timeGrid.push(alt_paper.text(alt_paper.width-columnWidth/2,temp16percent*3+topForecastSpace,"Rain").attr(textLabelsAttr));
+        timeGrid.push(alt_paper.text(alt_paper.width-columnWidth/2,temp16percent*5+topForecastSpace,"Wind").attr(textLabelsAttr));
 
         // draw bottom border 'night' alt_paper.rect(x, y, width, height, [r])
         var nightFooterAttr = {"opacity":0.8,fill:"black",stroke:"black"};
-        timeGrid.push(alt_paper.rect(0,sunChartBottom,w,h-sunChartBottom).attr(nightFooterAttr));
+        timeGrid.push(alt_paper.rect(0,sunChartBottom,alt_paper.width,alt_paper.height-sunChartBottom).attr(nightFooterAttr));
         
         // draw Degrees on right border
         // maxAltitude+"°"  works in test but not with prod?  temp removed
-        timeGrid.push(alt_paper.text(w-20,sunChartBottom-maxAltitude*window.altScale,maxAltitude).attr(fontAttr));
+        timeGrid.push(alt_paper.text(alt_paper.width-20,sunChartBottom-maxAltitude*window.altScale,maxAltitude).attr(fontAttr));
         tempDegree = Math.round((maxAltitude-10)/10) * 10;
         while (tempDegree>=10){
-          timeGrid.push(alt_paper.text(w-20,sunChartBottom-tempDegree*window.altScale,tempDegree).attr(fontAttr));
+          timeGrid.push(alt_paper.text(alt_paper.width-20,sunChartBottom-tempDegree*window.altScale,tempDegree).attr(fontAttr));
           tempDegree =tempDegree - 10;
         }
-        timeGrid.push(alt_paper.text(w-20,sunChartBottom,"0").attr(fontAttr))
+        timeGrid.push(alt_paper.text(alt_paper.width-20,sunChartBottom,"0").attr(fontAttr))
 
         
         // draw forcast.io cloud hourly data
@@ -195,15 +179,15 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
         
         // draw cloud grid
         var forecastLineAttr = {fill:'grey',stroke:"white","stroke-width":1,"stroke-dasharray":"."};
-        forecastGrid.push(alt_paper.path([['M',0,topForecastSpace],['L',w-columnWidth,topForecastSpace]]).attr(forecastLineAttr));
-        forecastGrid.push(alt_paper.path([['M',0,((bottomForecastSpace-topForecastSpace)/3)+topForecastSpace],['L',w-columnWidth,((bottomForecastSpace-topForecastSpace)/3)+topForecastSpace]]).attr(forecastLineAttr));
-        forecastGrid.push(alt_paper.path([['M',0,((bottomForecastSpace-topForecastSpace)/3)*2+topForecastSpace],['L',w-columnWidth,((bottomForecastSpace-topForecastSpace)/3)*2+topForecastSpace]]).attr(forecastLineAttr));
-        forecastGrid.push(alt_paper.path([['M',0,bottomForecastSpace],['L',w-columnWidth,bottomForecastSpace]]).attr(forecastLineAttr));
+        forecastGrid.push(alt_paper.path([['M',0,topForecastSpace],['L',alt_paper.width-columnWidth,topForecastSpace]]).attr(forecastLineAttr));
+        forecastGrid.push(alt_paper.path([['M',0,((bottomForecastSpace-topForecastSpace)/3)+topForecastSpace],['L',alt_paper.width-columnWidth,((bottomForecastSpace-topForecastSpace)/3)+topForecastSpace]]).attr(forecastLineAttr));
+        forecastGrid.push(alt_paper.path([['M',0,((bottomForecastSpace-topForecastSpace)/3)*2+topForecastSpace],['L',alt_paper.width-columnWidth,((bottomForecastSpace-topForecastSpace)/3)*2+topForecastSpace]]).attr(forecastLineAttr));
+        forecastGrid.push(alt_paper.path([['M',0,bottomForecastSpace],['L',alt_paper.width-columnWidth,bottomForecastSpace]]).attr(forecastLineAttr));
         // Draw cloud grid text labels 100%, 50%, 0%...
         //var cloudFontAttr = {font:'12px Verdana','font-size':12,'text-anchor':'left',fill:'white',stroke:"white"};
-        //timeGrid.push(alt_paper.text(w-columnWidth,topForecastSpace,"100%").attr(cloudFontAttr));
-        //timeGrid.push(alt_paper.text(w-columnWidth,((bottomForecastSpace-topForecastSpace)/2)+topForecastSpace,"50%").attr(cloudFontAttr));
-        //timeGrid.push(alt_paper.text(w-columnWidth,bottomForecastSpace,"0%").attr(cloudFontAttr));
+        //timeGrid.push(alt_paper.text(alt_paper.width-columnWidth,topForecastSpace,"100%").attr(cloudFontAttr));
+        //timeGrid.push(alt_paper.text(alt_paper.width-columnWidth,((bottomForecastSpace-topForecastSpace)/2)+topForecastSpace,"50%").attr(cloudFontAttr));
+        //timeGrid.push(alt_paper.text(alt_paper.width-columnWidth,bottomForecastSpace,"0%").attr(cloudFontAttr));
 
       }
       else {  // refresh != 1 ... only refresh current time & alt overlay
@@ -218,7 +202,7 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
       tempX = parseInt(((parseInt(currentTimeSplit[0])-parseInt(sunRiseSplit[0])+1)*columnWidth)-parseInt(columnTimeRatio*(60-currentTimeSplit[1])));
       //alert ('tempX: '+tempX);
 
-      tempY = parseInt(h - (currentAlt * window.altScale) - columnWidth/2);
+      tempY = parseInt(alt_paper.height - (currentAlt * window.altScale) - columnWidth/2);
       //console.log("altitudeForecast vars tempX:"+tempX+" tempY:"+tempY+" window.altScale:"+window.altScale);
 
       tempRadius = columnWidth/2+4;
@@ -226,7 +210,7 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
       var SunMarkerLineAttr = {"opacity":0.8,fill:'orange',stroke:"orange","stroke-width":6,"stroke-dasharray":"-"};
       window.timeAltOverlay.push(alt_paper.circle(tempX, tempY, tempRadius).attr(SunMarkerSunAttr));
       //draw time line
-      window.timeAltOverlay.push(alt_paper.path([['M',tempX,tempY],['L', tempX,h]]).attr(SunMarkerLineAttr));
+      window.timeAltOverlay.push(alt_paper.path([['M',tempX,tempY],['L', tempX,alt_paper.height]]).attr(SunMarkerLineAttr));
       //draw alt line
-      window.timeAltOverlay.push(alt_paper.path([['M',tempX,tempY],['L',w,tempY]]).attr(SunMarkerLineAttr));     
+      window.timeAltOverlay.push(alt_paper.path([['M',tempX,tempY],['L',alt_paper.width,tempY]]).attr(SunMarkerLineAttr));     
 }
