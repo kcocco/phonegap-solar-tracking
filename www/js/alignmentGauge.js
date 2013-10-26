@@ -2,7 +2,21 @@
 function init_alignmentGauge(elementId){
   //<script src="raphael-min.js" type="text/javascript"></script>
       // Creates canvas 320 × 200 at 10, 50
-      paper = Raphael(elementId, 360, 360);
+      var w = 360;
+      var h = 360;
+      paper = Raphael(elementId, w, h);
+      //alt_paper = Raphael(elementId);
+      //var alt_paper = Raphael("wrap");
+      paper.setViewBox(0,0,w,h,true);
+
+      // from: http://jsfiddle.net/AUNwC/44/
+      // ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
+      var svg = document.querySelector("svg");
+      svg.removeAttribute("width");
+      svg.removeAttribute("height");
+
+
+      //paper = Raphael(elementId, 360, 360);
       // c = paper.rect(0, 0, 360, 360, 10);
       centerX = paper.width/2;
       centerY = paper.height/2;
