@@ -14,7 +14,7 @@ function init_altitudeForecast(elementId){
 
       //below does not seem to do anything?  notes:http://www.w3.org/TR/SVG11/coords.html#PreserveAspectRatioAttribute
       //   http://stackoverflow.com/questions/11176396/how-can-i-scale-raphael-js-elements-on-window-resize-using-jquery
-      alt_paper.canvas.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      alt_paper.canvas.setAttribute('preserveAspectRatio', 'xMidYMin meet');
 
       // from: http://jsfiddle.net/AUNwC/44/
       // ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
