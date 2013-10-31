@@ -7,8 +7,8 @@ var w = 640;
 var h = 360;
 
 function init_altitudeForecast(elementId){
-      alt_paper = Raphael(elementId, w, h);
-      //alt_paper = Raphael(elementId);
+      //alt_paper = Raphael(elementId, w, h);
+      alt_paper = Raphael(elementId);
       //var alt_paper = Raphael("wrap");
       alt_paper.setViewBox(0,0,w,h,true);
 
@@ -16,9 +16,9 @@ function init_altitudeForecast(elementId){
       // ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
       
       // remove to keep dimentions on Android?... did not work?
-      //var svg = document.querySelector("svg");
-      //svg.removeAttribute("width");
-      //svg.removeAttribute("height");
+      var svg = document.querySelector("svg");
+      svg.removeAttribute("width");
+      svg.removeAttribute("height");
 
 
 }
