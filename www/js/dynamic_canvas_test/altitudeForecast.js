@@ -11,6 +11,9 @@ function init_altitudeForecast(elementId){
       alt_paper = Raphael(elementId);
       //var alt_paper = Raphael("wrap");
       alt_paper.setViewBox(0,0,w,h,true);
+
+      //below does not seem to do anything?  notes:http://www.w3.org/TR/SVG11/coords.html#PreserveAspectRatioAttribute
+      //   http://stackoverflow.com/questions/11176396/how-can-i-scale-raphael-js-elements-on-window-resize-using-jquery
       paper.canvas.setAttribute('preserveAspectRatio', 'xMidYMin meet');
 
       // from: http://jsfiddle.net/AUNwC/44/
