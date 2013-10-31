@@ -11,6 +11,7 @@ function init_altitudeForecast(elementId){
       alt_paper = Raphael(elementId);
       //var alt_paper = Raphael("wrap");
       alt_paper.setViewBox(0,0,w,h,true);
+      paper.canvas.setAttribute('preserveAspectRatio', 'xMidYMin meet');
 
       // from: http://jsfiddle.net/AUNwC/44/
       // ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
