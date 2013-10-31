@@ -69,6 +69,7 @@
     -->
 
     <!-- Define app icon for each platform. -->
+	<!-- Built icons w/ http://www.exaviore.dk/project/phonegap-splash-and-icon-generator/ -->
     <icon src="icon.png" />
     <icon src="res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:density="ldpi" />
     <icon src="res/icon/android/icon-48-mdpi.png"   gap:platform="android"    gap:density="mdpi" />
