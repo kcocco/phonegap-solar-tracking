@@ -307,8 +307,6 @@ SproutLoop.com
             function onError(compassError) {
                 alert('Compass error: ' + compassError.code);
             }
-    
-
        </script>
     </head>
     <body>
@@ -323,45 +321,22 @@ SproutLoop.com
 
         <div data-role="header" data-position="fixed" data-theme="a">
                 <h1>Solar Tracker</h1>
-                <a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>
-                
+                <a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>                
         </div><!-- /header -->
 
         <div data-role="page" id="compass">
-
-            <div data-role="header">
-                <h1>Page Title</h1>
-            </div><!-- /header -->
             <div data-role="content">
                 <div id="alignmentGauge"></div>
             </div><!-- /content -->
-
-            <div data-role="footer">
-                <h4>Page Footer</h4>
-            </div><!-- /footer -->
         </div><!-- /page -->
 
         <div data-role="page" id="altitude">
-
-            <div data-role="header">
-                <h1>Page Title</h1>
-            </div><!-- /header -->
-
             <div data-role="content">
                 <div id="altitudeForecast"></div>
             </div><!-- /content -->
-
-            <div data-role="footer">
-                <h4>Page Footer</h4>
-            </div><!-- /footer -->
         </div><!-- /page -->
 
         <div data-role="page" id="data">
-
-            <div data-role="header">
-                <h1>Page Title</h1>
-            </div><!-- /header -->
-
             <div data-role="content">
                 <h1> GEOLOCATION INFO: </h1>
                 <p id="geolocation">Finding geolocation...</p>
@@ -378,10 +353,6 @@ SproutLoop.com
                 <button onclick="startWatch();">Start Watching</button>
                 <button onclick="stopWatch();">Stop Watching</button>
             </div><!-- /content -->
-
-            <div data-role="footer">
-                <h4>Page Footer</h4>
-            </div><!-- /footer -->
         </div><!-- /page -->
 <!-- 
         <div class="app">
