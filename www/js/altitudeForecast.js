@@ -176,13 +176,13 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
     // Show a custom alert
     function showAlert() {
         navigator.notification.alert(
-            'temp16percent:'+temp16percent+' topForecastSpace:'+topForecastSpace+' timeTextSpace:'+timeTextSpace+' bottomForecastSpace:'+bottomForecastSpace+' topSunChart:'+topSunChart+' columnWidth:'+columnWidth+' calc(temp16percent*5+topForecastSpace):'+(temp16percent*5+topForecastSpace),  // message
+            'temp16percent:'+temp16percent+' topForecastSpace:'+topForecastSpace+' timeTextSpace:'+timeTextSpace+' bottomForecastSpace:'+bottomForecastSpace+' topSunChart:'+topSunChart+'sunChartBottom:'+sunChartBottom+' columnWidth:'+columnWidth+' calc(temp16percent*5+topForecastSpace):'+(temp16percent*5+topForecastSpace),  // message
              alertDismissed,         // callback
             'bebug',                 // title
             'Done'                   // buttonName
         );
     }
-   // showAlert();
+    showAlert();
 //Phonegap alert debug end
 
         // Draw labels: TIME , RAIN, WIND
@@ -191,11 +191,7 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
         timeGrid.push(alt_paper.text(w-columnWidth/2,temp16percent+topForecastSpace,"Cloud").attr(textLabelsAttr));
         timeGrid.push(alt_paper.text(w-columnWidth/2,temp16percent*3+topForecastSpace,"Rain").attr(textLabelsAttr));
         timeGrid.push(alt_paper.text(w-columnWidth/2,temp16percent*5+topForecastSpace,"Wind").attr(textLabelsAttr));
-
-        // draw bottom border 'night' alt_paper.rect(x, y, width, height, [r])
-        var nightFooterAttr = {"opacity":0.8,fill:"black",stroke:"black"};
-        timeGrid.push(alt_paper.rect(0,sunChartBottom,w,h-sunChartBottom).attr(nightFooterAttr));
-        
+                
         // draw Degrees on right border
         // maxAltitude+"°"  works in test but not with prod?  temp removed
         timeGrid.push(alt_paper.text(w-20,sunChartBottom-maxAltitude*window.altScale,maxAltitude).attr(fontAttr));
@@ -206,6 +202,9 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
         }
         timeGrid.push(alt_paper.text(w-20,sunChartBottom,"0").attr(fontAttr))
 
+        // draw bottom border 'night' alt_paper.rect(x, y, width, height, [r])
+        var nightFooterAttr = {"opacity":0.8,fill:"black",stroke:"black"};
+        timeGrid.push(alt_paper.rect(0,sunChartBottom,w,h-sunChartBottom).attr(nightFooterAttr));
         
         // draw forcast.io cloud hourly data
         var forecastGrid = alt_paper.set();
