@@ -8,7 +8,7 @@ function init_alignmentGauge(elementId){
       paper = Raphael(elementId, widthAlign, heightAlign);
       //alt_paper = Raphael(elementId);
       //var alt_paper = Raphael("wrap");
-      paper.setViewBox(0,0,widthAlign,heightAlign,true);
+      //paper.setViewBox(0,0,widthAlign,heightAlign,true);
 
       // from: http://jsfiddle.net/AUNwC/44/
       // ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
