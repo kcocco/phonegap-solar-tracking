@@ -176,13 +176,13 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
     // Show a custom alert
     function showAlert() {
         navigator.notification.alert(
-            'temp16percent:'+temp16percent+' topForecastSpace:'+topForecastSpace+' timeTextSpace:'+timeTextSpace+' bottomForecastSpace:'+bottomForecastSpace+' topSunChart:'+topSunChart+'sunChartBottom:'+sunChartBottom+' columnWidth:'+columnWidth+' calc(temp16percent*5+topForecastSpace):'+(temp16percent*5+topForecastSpace),  // message
+            'temp16percent:'+temp16percent+' topForecastSpace:'+topForecastSpace+' timeTextSpace:'+timeTextSpace+' bottomForecastSpace:'+bottomForecastSpace+' topSunChart:'+topSunChart+' sunChartBottom:'+sunChartBottom+' columnWidth:'+columnWidth+' calc(temp16percent*5+topForecastSpace):'+(temp16percent*5+topForecastSpace),  // message
              alertDismissed,         // callback
             'bebug',                 // title
             'Done'                   // buttonName
         );
     }
-    showAlert();
+    //showAlert();
 //Phonegap alert debug end
 
         // Draw labels: TIME , RAIN, WIND
