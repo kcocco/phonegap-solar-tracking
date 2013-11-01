@@ -181,14 +181,14 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
     //
     function showAlert() {
         navigator.notification.alert(
-            'temp16percent:'+temp16percent+' topForecastSpace:'+topForecastSpace+' topForecastSpace:'+topForecastSpace+' timeTextSpace:'+timeTextSpace+'bottomForecastSpace:'+bottomForecastSpace+' topSunChart:'+topSunChart+' columnWidth:'+columnWidth,  // message
+            'temp16percent:'+temp16percent+' topForecastSpace:'+topForecastSpace+' timeTextSpace:'+timeTextSpace+' bottomForecastSpace:'+bottomForecastSpace+' topSunChart:'+topSunChart+' columnWidth:'+columnWidth+' calc(temp16percent*5+topForecastSpace):'+(temp16percent*5+topForecastSpace),  // message
              alertDismissed,         // callback
-            'Game Over',            // title
+            'bebug',            // title
             'Done'                  // buttonName
         );
     }
     showAlert();
-
+//Phonegap alert debug end
 
 
 
