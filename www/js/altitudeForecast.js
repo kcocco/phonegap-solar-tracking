@@ -168,6 +168,30 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
           TimeSlot=TimeSlot+1;
         }
         
+
+
+
+//Phonegap alert debug
+// alert dialog dismissed
+    function alertDismissed() {
+        // do something
+    }
+
+    // Show a custom alert
+    //
+    function showAlert() {
+        navigator.notification.alert(
+            'temp16percent:'+temp16percent+' topForecastSpace:'+topForecastSpace+' topForecastSpace:'+topForecastSpace+' timeTextSpace:'+timeTextSpace+'bottomForecastSpace:'+bottomForecastSpace+' topSunChart:'+topSunChart+' columnWidth:'+columnWidth,  // message
+             alertDismissed,         // callback
+            'Game Over',            // title
+            'Done'                  // buttonName
+        );
+    }
+
+
+
+
+
         // Draw labels: TIME , RAIN, WIND
         var textLabelsAttr = {font:'12px Verdana','font-size':11,'text-anchor':'left',fill:'white',stroke:"white"};
         timeGrid.push(alt_paper.text(w-columnWidth/2,timeTextSpace,"Time").attr(textLabelsAttr));
