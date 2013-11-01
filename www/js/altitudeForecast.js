@@ -187,7 +187,7 @@ function altitudeForecast(refresh, sunrise, sunset, currentTime, currentAlt, alt
             'Done'                  // buttonName
         );
     }
-
+    showAlert();
 
 
 
