@@ -12,9 +12,9 @@ function init_alignmentGauge(elementId){
 
       // from: http://jsfiddle.net/AUNwC/44/
       // ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
-      //var svg = document.querySelector("svg");
-      //svg.removeAttribute("width");
-      //svg.removeAttribute("height");
+      var svg = document.querySelector("svg");
+      svg.removeAttribute("width");
+      svg.removeAttribute("height");
 
 
       //paper = Raphael(elementId, 360, 360);
