@@ -176,7 +176,7 @@ SproutLoop.com
                                     'SUNSET time: '            + sunsetStr              + '<br />' +
                                     '        - Azimuth: '      + sunsetAzimuth          + '<br />';
                 
-                $( document ).on( "pageload", ".compass", drawCompass(1));
+                drawCompass(1);
                 
                 getWeather();
                 //drawAltitude(1);
@@ -216,7 +216,7 @@ SproutLoop.com
                             i++;
                         }
                         
-                        $( document ).on( "pageload", ".altitude", drawAltitude(1));
+                        drawAltitude(1);
                         //console.log('in getweather cloudCoverArray:'+cloudCoverArray);
                         //alert(cloudCoverArray.join('\n'))
                         //alert(precipProbabilityArray.join('\n'))
