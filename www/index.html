@@ -255,10 +255,27 @@ SproutLoop.com
             // The watch id references the current `watchHeading`
             var watchID = null;
 
+            // orientation change will reset compass heading            
+            window.addEventListener('orientationchange', doOnOrientationChange);
+            function doOnOrientationChange()
+            {
+                startWatch()    
+                 // switch(window.orientation) 
+                 // {  
+                 //  case -90:
+                 //  case 90:
+                 //    alert('landscape');
+                 //    break; 
+                 //  default:
+                 //    alert('portrait');
+                 //    break; 
+                 // }
+            }
+
             // Start watching the compass
             //
             function startWatch() {
-                // Update compass every 3 seconds
+                // Update compass every 1 seconds
                 var options = { frequency: 1000 };
                 watchID = navigator.compass.watchHeading(onSuccessWatch, onError, options);
             }
