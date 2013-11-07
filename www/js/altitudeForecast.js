@@ -10,7 +10,7 @@ function init_altitudeForecast(elementId){
       alt_paper = Raphael(elementId, w, h);
       //alt_paper = Raphael(elementId);
       
-      //alt_paper.setViewBox(0,0,w,h,true);
+      alt_paper.setViewBox(0,0,w,h,true);
 
       // from: http://jsfiddle.net/AUNwC/44/
       // ok, raphael sets width/height even though a viewBox has been set, so let's rip out those attributes (yes, this will not work for VML)
