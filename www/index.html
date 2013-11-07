@@ -275,9 +275,6 @@ SproutLoop.com
             // onSuccess: Get the current heading
             //
             function onSuccessWatch(heading) {
-                // Update the jquery mobile according label
-                var element = document.getElementById('compassText');
-                element.innerHTML = heading.magneticHeading;
     
                 var element = document.getElementById('heading');
                 element.innerHTML = 'Heading: ' + heading.magneticHeading;
@@ -299,7 +296,7 @@ SproutLoop.com
     <body>
 
         <div data-role="collapsible" data-collapsed="false" >
-            <h3 id="compassText">Loading GeoLocation and Compass ...</h3>
+            <h3 id="compassText"></h3>
             <div id="alignmentGauge"></div>
         </div>
         <div data-role="collapsible" data-collapsed="false" >
