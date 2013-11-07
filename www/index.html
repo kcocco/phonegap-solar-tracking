@@ -39,10 +39,6 @@ SproutLoop.com
                 var cloudCoverArray = new Array();
                 var altitudeArray = new Array();
 
-            // Wait for device API libraries to load
-            //
-            document.addEventListener("deviceready", onDeviceReady, false);
-
             function convertDeg(degIn) {
                 if (degIn>-1) 
                 {degOut = 180 + degIn}
@@ -59,11 +55,14 @@ SproutLoop.com
                 return str;
             }
 
+            // Wait for device API libraries to load
+            //
+            document.addEventListener("deviceready", onDeviceReady, false);
+
             // device APIs are available call geo
             //
             function onDeviceReady() {
                 navigator.compass.getCurrentHeading(onSuccessCompass, onErrorCompass);
-                startWatch();
             }
 
             // onSuccess: Get the current heading
@@ -73,6 +72,8 @@ SproutLoop.com
                 console.log('Heading: ' + heading.magneticHeading);
                 window.heading = heading.magneticHeading;
                 navigator.geolocation.getCurrentPosition(onSuccessGeo, onErrorGeo);
+                drawCompass(1);
+                startWatch();
             }
 
             // onError: Failed to get the heading
@@ -163,11 +164,8 @@ SproutLoop.com
                                     'SUNSET time: '            + sunsetStr              + '<br />' +
                                     '        - Azimuth: '      + sunsetAzimuth          + '<br />';
                 
-                drawCompass(1);
-                
                 getWeather();
-                //drawAltitude(1);
-                
+                //drawAltitude(1);   
             }
 
             // ***************************************************************
