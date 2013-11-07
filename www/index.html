@@ -275,8 +275,13 @@ SproutLoop.com
             // onSuccess: Get the current heading
             //
             function onSuccessWatch(heading) {
+                // Update the jquery mobile according label
+                var element = document.getElementById('compassText');
+                element.innerHTML = heading.magneticHeading;
+    
                 var element = document.getElementById('heading');
                 element.innerHTML = 'Heading: ' + heading.magneticHeading;
+
                 currentHeading = heading.magneticHeading;
                 // alignmentGauge(refresh, azimuth, heading, sunRiseAngle, sunSetAngle, sunRiseTime, sunSetTime)
                 //alignmentGauge(0,200,heading.magneticHeading,64,292,"5:67","9:11");
@@ -294,12 +299,12 @@ SproutLoop.com
     <body>
 
         <div data-role="collapsible" data-collapsed="false" >
-            <h3>Compass</h3>
-            <div id="alignmentGauge">Loading GeoLocation...</div>
+            <h3 id="compassText">Loading GeoLocation and Compass ...</h3>
+            <div id="alignmentGauge"></div>
         </div>
         <div data-role="collapsible" data-collapsed="false" >
             <h3>Forecast</h3>
-            <div id="altitudeForecast">Loading Weather Forecast...</div>
+            <div id="altitudeForecast"></div>
         </div>
         <div data-role="collapsible">
             <h3>Data</h3>
