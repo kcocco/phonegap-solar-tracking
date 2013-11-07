@@ -72,8 +72,6 @@ SproutLoop.com
                 console.log('Heading: ' + heading.magneticHeading);
                 window.heading = heading.magneticHeading;
                 navigator.geolocation.getCurrentPosition(onSuccessGeo, onErrorGeo);
-                drawCompass(1);
-                startWatch();
             }
 
             // onError: Failed to get the heading
@@ -164,6 +162,9 @@ SproutLoop.com
                                     'SUNSET time: '            + sunsetStr              + '<br />' +
                                     '        - Azimuth: '      + sunsetAzimuth          + '<br />';
                 
+                drawCompass(1);
+                startWatch();
+
                 getWeather();
                 //drawAltitude(1);   
             }
@@ -250,7 +251,6 @@ SproutLoop.com
                 alert('code: '    + error.code    + '\n' +
                       'message: ' + error.message + '\n');
             }
-
 
             // The watch id references the current `watchHeading`
             var watchID = null;
