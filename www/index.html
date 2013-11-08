@@ -294,8 +294,8 @@ SproutLoop.com
             function changeAccordionLabel(newLabel) {
                 //cache the `<span class="ui-btn-text">` element and its child
                 var $btn_text  = $('#compassCollapsible').find('.ui-btn-text'),
-                    $btn_child = $btn_text.find('.ui-collapsible-heading-toggle');
-                // changed above still now working....? $btn_child = $btn_text.find('.ui-collapsible-heading-status');
+                    $btn_child = $btn_child = $btn_text.find('.ui-collapsible-heading-status');
+                // changed above still now working....? $btn_child = $btn_text.find('.ui-collapsible-heading-toggle');
                 tempLabel = Math.round(newLabel);
                 tempLabel = tempLabel+"°";
                 //overwrite the header text, then append its child to restore the previous structure
@@ -306,7 +306,7 @@ SproutLoop.com
             //
             function onSuccessWatch(heading) {
                 
-                //changeAccordionLabel(heading);
+                changeAccordionLabel(heading);
 
                 var element = document.getElementById('heading');
                 element.innerHTML = 'Heading: ' + heading.magneticHeading;
