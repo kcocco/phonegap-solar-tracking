@@ -295,6 +295,7 @@ SproutLoop.com
                 //cache the `<span class="ui-btn-text">` element and its child
                 var $btn_text  = $('#compassCollapsible').find('.ui-btn-text'),
                     $btn_child = $btn_text.find('.ui-collapsible-heading-toggle');
+                // changed above still now working....? $btn_child = $btn_text.find('.ui-collapsible-heading-status');
                 tempLabel = Math.round(newLabel);
                 tempLabel = tempLabel+"°";
                 //overwrite the header text, then append its child to restore the previous structure
@@ -305,7 +306,7 @@ SproutLoop.com
             //
             function onSuccessWatch(heading) {
                 
-                changeAccordionLabel(heading);
+                //changeAccordionLabel(heading);
 
                 var element = document.getElementById('heading');
                 element.innerHTML = 'Heading: ' + heading.magneticHeading;
@@ -327,7 +328,7 @@ SproutLoop.com
     <body>
 
         <div data-role="collapsible" data-collapsed="false" id="compassCollapsible" >
-            <h3>Compass and GEO loading...</h3>
+            <h3>Compass</h3>
             <div id="alignmentGauge"></div>
         </div>
         <div data-role="collapsible" data-collapsed="false" >
