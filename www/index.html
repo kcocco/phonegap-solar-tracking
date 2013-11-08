@@ -255,23 +255,23 @@ SproutLoop.com
             // The watch id references the current `watchHeading`
             var watchID = null;
 
-            // orientation change will reset compass heading            
-            window.addEventListener('orientationchange', doOnOrientationChange);
-            function doOnOrientationChange()
-            {
-                stopWatch()
-                startWatch()    
-                 // switch(window.orientation) 
-                 // {  
-                 //  case -90:
-                 //  case 90:
-                 //    alert('landscape');
-                 //    break; 
-                 //  default:
-                 //    alert('portrait');
-                 //    break; 
-                 // }
-            }
+            // orientation change will reset compass heading .. does not work!           
+            // window.addEventListener('orientationchange', doOnOrientationChange);
+            // function doOnOrientationChange()
+            // {
+            //     stopWatch()
+            //     startWatch()    
+            //      // switch(window.orientation) 
+            //      // {  
+            //      //  case -90:
+            //      //  case 90:
+            //      //    alert('landscape');
+            //      //    break; 
+            //      //  default:
+            //      //    alert('portrait');
+            //      //    break; 
+            //      // }
+            // }
 
             // Start watching the compass
             //
@@ -290,10 +290,23 @@ SproutLoop.com
                 }
             }
 
+            // Change the Accordion Label to compass heading.  from:http://stackoverflow.com/questions/7857218/jquery-mobile-dynamically-change-the-text-of-the-header-of-a-collapsible-div
+            function changeAccordionLabel(newLabel) {
+                //cache the `<span class="ui-btn-text">` element and its child
+                var $btn_text  = $('#compassCollapsible').find('.ui-btn-text'),
+                    $btn_child = $btn_text.find('.ui-collapsible-heading-status');
+                tempLabel = Math.round(newLabel);
+                tempLabel = tempLabel+"°";
+                //overwrite the header text, then append its child to restore the previous structure
+                $btn_text.text(newLabel).append($btn_child);
+            }
+        
             // onSuccess: Get the current heading
             //
             function onSuccessWatch(heading) {
-    
+                
+                changeAccordionLabel(heading);
+
                 var element = document.getElementById('heading');
                 element.innerHTML = 'Heading: ' + heading.magneticHeading;
 
@@ -313,8 +326,8 @@ SproutLoop.com
     </head>
     <body>
 
-        <div data-role="collapsible" data-collapsed="false" >
-            <h3 id="compassText"></h3>
+        <div data-role="collapsible" data-collapsed="false" id="compassCollapsible" >
+            <h3>Compass and GEO loading...</h3>
             <div id="alignmentGauge"></div>
         </div>
         <div data-role="collapsible" data-collapsed="false" >
